@@ -1,0 +1,38 @@
+<odoo>
+    <record id="view_bed_addon_form" model="ir.ui.view">
+        <field name="name">bed.addon.form</field>
+        <field name="model">bed.addon</field>
+        <field name="arch" type="xml">
+            <form string="Bed Add-on">
+
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="product_id" readonly="1" context="{'form_view_ref': 'product.product_normal_form_view'}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_bed_addon_tree" model="ir.ui.view">
+        <field name="name">bed.addon.tree</field>
+        <field name="model">bed.addon</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="product_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_bed_addon" model="ir.actions.act_window">
+        <field name="name">Bed Add-ons</field>
+        <field name="res_model">bed.addon</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_bed_addons" name="Bed Add-ons" parent="menu_bed_root" action="action_bed_addon"/>
+</odoo>
