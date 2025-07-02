@@ -21,6 +21,7 @@ class BedProduct(models.Model):
 
     wood_type = fields.Char()
     addon_ids = fields.Many2many('bed.addon', string='Add-ons')
+    image_128 = fields.Image("Image", max_width=128, max_height=128)
 
     price = fields.Float(string="Price")
     product_id = fields.Many2one(
@@ -35,7 +36,7 @@ class BedProduct(models.Model):
 
         product = self.env['product.product'].create({
             'name': bed.name,
-            'type': 'product',  # stockable product
+            'type': 'product',
             'default_code': f"BED-{bed.id}",
             'sale_ok': True,
             'purchase_ok': True,
