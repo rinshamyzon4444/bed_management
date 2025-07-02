@@ -3,6 +3,7 @@ from odoo import models, fields, api
 
 class BedProduct(models.Model):
     _name = 'bed.product'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Bed Product'
 
     name = fields.Char(required=True)
@@ -31,7 +32,7 @@ class BedProduct(models.Model):
     @api.model
     def create(self, vals):
         bed = super(BedProduct, self).create(vals)
-        # auto-create a stockable product for this bed
+
         product = self.env['product.product'].create({
             'name': bed.name,
             'type': 'product',  # stockable product

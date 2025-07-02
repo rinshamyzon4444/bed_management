@@ -2,6 +2,7 @@ from odoo import models, fields ,api
 
 class BedAddon(models.Model):
     _name = 'bed.addon'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Bed Add-on'
 
 
@@ -16,7 +17,7 @@ class BedAddon(models.Model):
         addon = super(BedAddon, self).create(vals)
         product = self.env['product.product'].create({
             'name': addon.name,
-            'type': 'consu',  # Can change to 'product' for stockable items
+            'type': 'consu',
             'default_code': f"ADDON-{addon.id}",
             'sale_ok': True,
             'purchase_ok': False,
