@@ -1,0 +1,9 @@
+<odoo>
+    <record id="action_bed_bom" model="ir.actions.act_window">
+        <field name="name">Bill of Materials</field>
+        <field name="res_model">mrp.bom</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <menuitem id="menu_bed_bom" name="Bill of Materials" parent="menu_bed_root" action="action_bed_bom"/>
+</odoo>

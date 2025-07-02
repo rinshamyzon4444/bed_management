@@ -52,7 +52,7 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="menu_bed_root" name="Bed Product Catalog"/>
+    <menuitem id="menu_bed_root" name="Bed Product Management"/>
     <menuitem id="menu_bed_products" name="Bed Products" parent="menu_bed_root" action="action_bed_product"/>
 
 </odoo>
