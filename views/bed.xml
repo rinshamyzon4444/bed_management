@@ -13,25 +13,24 @@
                         <field name="height"/>
 
                     </group>
-                <sheet>
+               <sheet>
                      <notebook>
                         <page string="Info">
                             <group>
-                                <field name="wood_type"/>
+                                 <field name="wood_type"/>
                                 <field name="addon_ids" widget="many2many_tags"/>
                                 <field name="product_id" readonly="1" context="{'form_view_ref': 'product.product_normal_form_view'}"/>
                                 <field name="price"/>
 
-
                             </group>
                         </page>
                      </notebook>
-                </sheet>
-                  <div class="oe_chatter">
+               </sheet>
+                 <div class="oe_chatter">
 
                             <field name="message_follower_ids" groups="base.group_user"/>
                             <field name="message_ids"/>
-                  </div>
+                 </div>
             </form>
         </field>
     </record>
