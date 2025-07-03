@@ -1,58 +1,46 @@
 <odoo>
-    <record id="view_bed_product_form" model="ir.ui.view">
-        <field name="name">bed.product.form</field>
-        <field name="model">bed.product</field>
+    <record id="view_product_template_form_inherit_bed" model="ir.ui.view">
+        <field name="name">product.template.inherit.bed</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
         <field name="arch" type="xml">
-            <form string="Bed Product">
-                <sheet>
-                    <group>
-                        <field name="name"/>
-                        <field name="bed_type"/>
-                        <field name="length"/>
-                        <field name="width"/>
-                        <field name="height"/>
-                    </group>
-                    <notebook>
-                        <page string="Info">
-                            <group>
-                                <field name="wood_type"/>
-                                <field name="addon_ids" widget="many2many_tags"/>
-                                <field name="product_id" readonly="1"
-                                       context="{'form_view_ref': 'product.product_normal_form_view'}"/>
-                                <field name="price"/>
-                            </group>
-                        </page>
-                    </notebook>
-                </sheet>
-                <div class="oe_chatter">
+            <xpath expr="//div[@name='options']/span[1]" position="before">
+                <span class="d-inline-flex">
+                    <field name="is_bed"/>
+                    <label for="is_bed"/>
+                </span>
+            </xpath>
+            <xpath expr="//field[@name='uom_po_id']" position="after">
+                <field name="bed_type" invisible="is_bed==False"/>
+                <field name="wood_type" invisible="is_bed==False"/>
+            </xpath>
+        </field>
+    </record>
 
-                    <field name="message_follower_ids" groups="base.group_user"/>
-                    <field name="message_ids"/>
+    <record id="product_template_kanban_inherit_bed" model="ir.ui.view">
+        <field name="name">product.template.kanban.inherit.bed</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_kanban_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='product_lst_price']" position="before">
+                <div invisible="bed_type==False">
+                    Bed Type:
+                    <field name="bed_type" widget="badge"/>
                 </div>
-            </form>
+            </xpath>
         </field>
     </record>
 
-    <record id="view_bed_product_tree" model="ir.ui.view">
-        <field name="name">bed.product.tree</field>
-        <field name="model">bed.product</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
-                <field name="bed_type"/>
-                <field name="wood_type"/>
-                <field name="price"/>
-            </tree>
-        </field>
-    </record>
-
-    <record id="action_bed_product" model="ir.actions.act_window">
+    <record id="action_bed_products_only" model="ir.actions.act_window">
         <field name="name">Bed Products</field>
-        <field name="res_model">bed.product</field>
-        <field name="view_mode">tree,form</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="domain">[('is_bed','=',True)]</field>
     </record>
 
     <menuitem id="menu_bed_root" name="Bed Product Management"/>
-    <menuitem id="menu_bed_products" name="Bed Products" parent="menu_bed_root" action="action_bed_product"/>
-
+    <menuitem id="menu_bed_products_root" name="Products"
+              parent="menu_bed_root" sequence="1"/>
+    <menuitem id="menu_bed_products" name="Bed Products"
+              parent="menu_bed_products_root" action="action_bed_products_only" sequence="10"/>
 </odoo>

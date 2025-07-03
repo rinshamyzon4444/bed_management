@@ -4,7 +4,6 @@
         <field name="model">bed.addon</field>
         <field name="arch" type="xml">
             <form string="Bed Add-on">
-
                 <sheet>
                     <group>
                         <field name="name"/>
@@ -40,5 +39,5 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="menu_bed_addons" name="Bed Add-ons" parent="menu_bed_root" action="action_bed_addon"/>
+    <menuitem id="menu_bed_addons" name="Optional Products" parent="menu_bed_products_root" action="action_bed_addon"/>
 </odoo>
