@@ -39,5 +39,5 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="menu_bed_addons" name="Bed Add-ons" parent="menu_bed_root" action="action_bed_addon"/>
+    <menuitem id="menu_bed_addons" name="Optional Products" parent="menu_bed_root" action="action_bed_addon"/>
 </odoo>

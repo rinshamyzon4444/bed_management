@@ -9,6 +9,8 @@
        'security/ir.model.access.csv',
         'views/bed.xml',
         'views/addons.xml',
+
+       
     ],
     "installable": True,
     "application": True,

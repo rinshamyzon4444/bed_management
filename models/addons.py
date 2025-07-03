@@ -5,7 +5,6 @@ class BedAddon(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Bed Add-on'
 
-
     name = fields.Char(required=True)
     description = fields.Text()
     product_id = fields.Many2one('product.product', string="Related Product", readonly=True)
