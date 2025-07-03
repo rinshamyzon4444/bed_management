@@ -5,5 +5,5 @@
         <field name="view_mode">tree,form,kanban</field>
     </record>
 
-    <menuitem id="menu_bed_bom" name="Bill of Materials" parent="menu_bed_root" action="action_bed_bom"/>
+    <menuitem id="menu_bed_bom" name="Bill of Materials" parent="menu_bed_root" action="action_bed_bom" sequence="20"/>
 </odoo>
