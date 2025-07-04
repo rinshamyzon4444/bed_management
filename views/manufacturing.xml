@@ -4,5 +4,17 @@
         <field name="res_model">mrp.production</field>
         <field name="view_mode">tree,form,kanban</field>
     </record>
+
+    <record id="view_mrp_production_form_edit_end_date" model="ir.ui.view">
+        <field name="name">mrp.production.form.make.date.finished.editable</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group/field[@name='date_finished']" position="replace">
+                <field name="date_finished" string="End Date" readonly="0"/>
+            </xpath>
+        </field>
+    </record>
+
     <menuitem id="menu_bed_mano" name="Manufacturing" parent="menu_bed_root" action="action_bed_mo" sequence="30"/>
 </odoo>
