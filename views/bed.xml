@@ -12,7 +12,7 @@
             </xpath>
             <xpath expr="//field[@name='uom_po_id']" position="after">
                 <field name="bed_type" invisible="is_bed==False"/>
-                <field name="wood_type" invisible="is_bed==False"/>
+                <field name="wood_type_ids" widget="many2many_tags" invisible="is_bed==False"/>
                 <field name="length" invisible="is_bed==False"/>
                 <field name="width" invisible="is_bed==False"/>
                 <field name="height" invisible="is_bed==False"/>
