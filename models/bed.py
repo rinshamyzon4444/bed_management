@@ -32,7 +32,7 @@ class ProductTemplate(models.Model):
     height = fields.Float(string="Height (cm)")
 
     def _ensure_wood_type_attribute(self):
-        attribute = self.env['product.attribute'].search([('name', '=', 'Wood Type')], limit=1)
+        attribute = self.env['product.attribute'].search([('name', 'ilike', 'Wood Type')], limit=1)
         if not attribute:
             attribute = self.env['product.attribute'].create({
                 'name': 'Wood Type',
