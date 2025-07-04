@@ -38,7 +38,7 @@
         <field name="name">Bed Products</field>
         <field name="res_model">product.template</field>
         <field name="view_mode">tree,form,kanban</field>
-        <field name="domain">[('is_bed','=',True)]</field>
+        <field name="domain">[('is_bed','!=',False)]</field>
     </record>
 
     <menuitem id="menu_bed_root" name="Bed Product Management"/>
