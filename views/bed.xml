@@ -10,6 +10,9 @@
                     <label for="is_bed"/>
                 </span>
             </xpath>
+            <xpath expr="//field[@name='product_tag_ids']" position="after">
+                    <field name="low_stock_threshold"/>
+            </xpath>
             <xpath expr="//field[@name='uom_po_id']" position="after">
                 <field name="bed_type" invisible="is_bed==False"/>
                 <field name="wood_type_ids" widget="many2many_tags" invisible="is_bed==False"/>

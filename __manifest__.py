@@ -14,6 +14,7 @@
         'views/bed.xml',
         'views/bom_inherit.xml',
         'views/manufacturing.xml',
+        'data/ir_cron.xml',
     ],
     'license': 'LGPL-3',
     'installable': True,

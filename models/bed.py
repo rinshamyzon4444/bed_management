@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import UserError
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
@@ -30,6 +31,9 @@ class ProductTemplate(models.Model):
     length = fields.Float(string="Length (cm)")
     width = fields.Float(string="Width (cm)")
     height = fields.Float(string="Height (cm)")
+
+    low_stock_threshold = fields.Integer(string="Minimum Quantity", default=3,help="The minimum quantity allowed in stock. If actual stock drops below this value, a low stock warning will be triggered.")
+    restock_quantity = fields.Integer(string="Suggested Restock Quantity", default=10, help="Suggested quantity to replenish when stock is low.")
 
     def _ensure_wood_type_attribute(self):
         attribute = self.env['product.attribute'].search([('name', 'ilike', 'Wood Type')], limit=1)
@@ -71,3 +75,17 @@ class ProductTemplate(models.Model):
         if 'wood_type_ids' in vals:
             self._sync_wood_type_to_attribute_lines()
         return res
+
+    def check_and_notify_low_stock(self):
+        for product in self:
+            qty_available = sum(product.product_variant_ids.mapped('qty_available'))
+
+            if qty_available < product.low_stock_threshold:
+                message = (
+                    f"⚠️ Low Stock Alert!\n"
+                    f"Product: {product.name}\n"
+                    f"Current Qty: {qty_available}\n"
+                    f"Recommended Restock: {product.restock_quantity}"
+                )
+                product.message_post(body=message, subtype_xmlid="mail.mt_note")
+                raise UserError(message)
