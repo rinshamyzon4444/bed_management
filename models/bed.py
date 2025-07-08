@@ -20,7 +20,7 @@ class ProductTemplate(models.Model):
         'product_tmpl_id',
         'attribute_value_id',
         string="Wood Types",
-        domain="[('attribute_id.name', '=', 'Wood Type')]",
+        domain="[('attribute_id.name', 'ilike', 'Wood Type')]",
         tracking=True,
     )
 
@@ -28,15 +28,16 @@ class ProductTemplate(models.Model):
     sale_ok = fields.Boolean(default=True)
     purchase_ok = fields.Boolean(default=True)
 
-    length = fields.Float(string="Length (cm)")
-    width = fields.Float(string="Width (cm)")
-    height = fields.Float(string="Height (cm)")
+    length = fields.Float(string='Length (in")')
+    width = fields.Float(string='Width (in")')
+    height = fields.Float(string='Height (in")')
 
     low_stock_threshold = fields.Integer(string="Minimum Quantity", default=3,help="The minimum quantity allowed in stock. If actual stock drops below this value, a low stock warning will be triggered.")
     restock_quantity = fields.Integer(string="Suggested Restock Quantity", default=10, help="Suggested quantity to replenish when stock is low.")
 
     def _ensure_wood_type_attribute(self):
-        attribute = self.env['product.attribute'].search([('name', 'ilike', 'Wood Type')], limit=1)
+        attribute = self.env['product.attribute'].search([('name', 'ilike', 'wood type')], limit=1)
+
         if not attribute:
             attribute = self.env['product.attribute'].create({
                 'name': 'Wood Type',
@@ -88,4 +89,6 @@ class ProductTemplate(models.Model):
                     f"Recommended Restock: {product.restock_quantity}"
                 )
                 product.message_post(body=message, subtype_xmlid="mail.mt_note")
-                raise UserError(message)
+		raise UserError(message)
+                if self.env.context.get('raise_warning', False):
+                    raise UserError(message)
