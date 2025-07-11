@@ -13,6 +13,10 @@
             <xpath expr="//group/field[@name='date_finished']" position="replace">
                 <field name="date_finished" string="End Date" readonly="0"/>
             </xpath>
+            <xpath expr="//page[@name='components']/field[@name='move_raw_ids']" position="after">
+                <button name="action_add_from_catalog_raw" string="Catalog" type="object" class="px-4 btn-link"
+                        />
+            </xpath>
         </field>
     </record>
 

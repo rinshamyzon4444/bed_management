@@ -11,7 +11,7 @@
                 </span>
             </xpath>
             <xpath expr="//field[@name='product_tag_ids']" position="after">
-                    <field name="low_stock_threshold"/>
+                <field name="low_stock_threshold"/>
             </xpath>
             <xpath expr="//field[@name='uom_po_id']" position="after">
                 <field name="bed_type" invisible="is_bed==False"/>
@@ -23,19 +23,56 @@
         </field>
     </record>
 
-    <record id="product_template_kanban_inherit_bed" model="ir.ui.view">
-        <field name="name">product.template.kanban.inherit.bed</field>
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_kanban_view"/>
-        <field name="arch" type="xml">
-            <xpath expr="//div[@name='product_lst_price']" position="before">
-                <div invisible="bed_type==False">
-                    Bed Type:
-                    <field name="bed_type" widget="badge"/>
-                </div>
-            </xpath>
-        </field>
-    </record>
+<!--    <record id="view_product_template_kanban_custom" model="ir.ui.view">-->
+<!--        <field name="name">product.template.kanban.custom</field>-->
+<!--        <field name="model">product.template</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <kanban class="o_kanban_custom_card">-->
+<!--                <field name="name"/>-->
+<!--                <field name="list_price"/>-->
+<!--                <field name="image_1920"/>-->
+<!--                <field name="qty_available"/>-->
+
+<!--                <templates>-->
+<!--                    <t t-name="kanban-box">-->
+<!--                        <div class="card shadow-sm rounded-xl p-2 bg-white">-->
+<!--                            <div class="d-flex justify-content-center align-items-center" style="height: 150px;">-->
+<!--                                <img t-if="record.image_1920.raw_value"-->
+<!--                                     t-att-src="'data:image/png;base64,%s' % record.image_1920.raw_value"-->
+<!--                                     class="img-fluid rounded"-->
+<!--                                     style="max-height: 140px; object-fit: cover;"/>-->
+<!--                                <div t-if="!record.image_1920.raw_value"-->
+<!--                                     class="bg-light d-flex align-items-center justify-content-center w-100"-->
+<!--                                     style="height: 100%;">-->
+<!--                                    <i class="fa fa-image fa-2x text-muted"/>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="mt-2 text-center">-->
+<!--                                <strong t-esc="record.name.value"/>-->
+<!--                                <div class="text-muted" t-esc="'Price: %.2f AED' % record.list_price.value"/>-->
+<!--                                <div class="text-muted" t-esc="'Stock: %.2f Units' % record.qty_available.value"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </t>-->
+<!--                </templates>-->
+<!--            </kanban>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+        <record id="product_template_kanban_inherit_bed" model="ir.ui.view">
+            <field name="name">product.template.kanban.inherit.bed</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='product_lst_price']" position="before">
+                    <div invisible="bed_type==False">
+                        Bed Type:
+                        <field name="bed_type" widget="badge"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
 
     <record id="action_bed_products_only" model="ir.actions.act_window">
         <field name="name">Bed Products</field>
