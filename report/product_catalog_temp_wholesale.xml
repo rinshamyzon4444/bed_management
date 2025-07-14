@@ -1,5 +1,5 @@
 <odoo>
-    <template id="report_product_catalog_retailprice" name="report_product_catalog">
+    <template id="report_product_catalog_wholesaleprice" name="report_product_catalog">
         <t t-if="o and 'company_id' in o">
             <t t-set="company" t-value="o.company_id"></t>
         </t>
@@ -11,7 +11,7 @@
                 <div class="col-2">
                     <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 130px;"/>
                 </div>
-                <div class="col-6" style="font-size: 15px;vertical-align: center;">
+                <div class="col-6" style="font-size: 14px;vertical-align: center;">
                     <t t-if="company.name">
                         <span t-field="company.name"/>
                         <br/>
@@ -65,14 +65,14 @@
                                                t-options='{"widget": "image"}'/>
                                         </div>
                                     </td>
-                                    <td style="border: 1px solid black;text-align: center;">
+                                    <td style="border: 0px solid black;">
                                         <t t-if="o.categ_id">
                                             <span>Category</span>
                                             <br/>
                                             <br/>
                                         </t>
-                                        <t t-if="o.list_price">
-                                            <span>Retail Price</span>
+                                        <t t-if="o.wholesale_price">
+                                            <span>WholeSale Price</span>
                                             <br/>
                                             <br/>
                                         </t>
@@ -112,8 +112,8 @@
                                                 <br/>
                                                 <br/>
                                             </t>
-                                            <t t-if="o.list_price">
-                                                <span t-field="o.list_price"
+                                            <t t-if="o.wholesale_price">
+                                                <span t-field="o.wholesale_price"
                                                       t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
                                                 <br/>
                                                 <br/>
@@ -151,8 +151,8 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
 
+                    </div>
                     <p style="page-break-after: always;"/>
                     <t t-if="len(o.product_variant_ids) > 1">
                         <t t-foreach="o.product_variant_ids" t-as="v">
@@ -200,7 +200,7 @@
                                                 <br/>
                                             </t>
                                             <t t-if="v.lst_price">
-                                                <span>Retail Price</span>
+                                                <span>WholeSale Price</span>
                                                 <br/>
                                                 <br/>
                                             </t>
@@ -217,7 +217,6 @@
                                                     <br/>
                                                     <br/>
                                                 </t>
-
                                                 <t t-if="(v.qty_available) > 0">
                                                     <span>In Stock</span>
                                                     <br/>
