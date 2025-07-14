@@ -1,16 +1,28 @@
-table.table_catalog {
-    width: 800px !important;
-    margin: auto;
+.o_img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-div.div-h-50 {
-    height: 50px !important;
-    padding-top: 10px;
+.o_catalog_title {
+    margin-bottom: 20px;
+}
+
+.tr_price {
+    color:black;
+    font-size:1.2rem;
+    margin-bottom:0.5rem;
+    font-weight:500;
+    line-height:1.2;
+}
+
+.o_cell_head {
+    font-size: 20px;
+}
+
+.sub_title {
+    padding-top: 25px;
     padding-bottom: 10px;
-}
-
-div.wh-description {
-    max-height: 100px !important;
-    width: 300px !important;
-    margin: auto;
 }

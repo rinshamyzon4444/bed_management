@@ -19,12 +19,11 @@
         'report/product_catalog_temp_wholesale.xml',
         'data/ir_cron.xml',
     ],
-    # 'assets': {
-    #     'web.report_assets_pdf': [
-    #         '/bed_management/static/src/scss/catalog_style_pdf.scss',
-    #         # 'bed_management/static/src/scss/catalog_style.scss',
-    #     ],
-    # },
+    'assets': {
+        'web.report_assets_pdf': [
+            'bed_management/static/src/scss/catalog_style_pdf.scss',
+        ],
+    },
     'license': 'LGPL-3',
     'installable': True,
     'auto_install': False,
