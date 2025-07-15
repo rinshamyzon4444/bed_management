@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="report_mrporder_inherit" inherit_id="mrp.report_mrporder">
+    <xpath expr="//t[@t-foreach='docs']" position="replace">
+      <t t-foreach="docs" t-as="doc">
+        <t t-call="web.external_layout">
+<!--            <barcode value="doc.name" type="Code128" width="300" height="50" humanreadable="True"/>-->
+          <div class="page" style="font-family: Arial, sans-serif; color: #333;">
+            <h2 style="text-align: center; color: grey; font-size: 40px; font-weight: bold;">Production Order</h2>
+              <div style="text-align: center; font-size: 14px; color: #333;">
+                    <p style="margin: 0; font-weight: bold;">Modular Minds Pvt. Ltd.</p>
+                    <p style="margin: 0;">#123, Industrial Estate,</p>
+                    <p style="margin: 0;">Electronic City, Bengaluru - 560100</p>
+                    <p style="margin: 0;">Phone: +91 98765 43210 | Email: info@modularminds.com</p>
+              </div>
+
+              <table style="width: 100%; margin-top: 20px; border: 1px solid #ccc; border-collapse: collapse; text-align: left;">
+                  <tr>
+                    <td style="width: 100%; border: 1px solid #ccc; padding: 15px;">
+                        <h6 style="color:black;">Customer Details</h6>
+                        <span>Name: <span t-field="doc.user_id"/></span><br/>
+                        <span>Address:</span><br/>
+                        <span>Mobile:</span><br/>
+                        <span>Email: </span><br/>
+                    </td>
+                </tr>
+              </table>
+
+              <table style="width: 100%; margin-top: 20px; border: 1px solid #ccc; text-align:left;">
+
+                   <tr>
+                       <td style="width: 50%; border-left: 1px solid #ccc; padding-left: 6px;">
+
+                            <span>Mo Number: <span t-field="doc.name"/></span><br/>
+                            <span>Customer Name: <span t-field="doc.user_id"/></span><br/>
+                            <span>Product: <span t-field="doc.product_id.display_name"/></span><br/>
+                            <span>Quantity: <span t-field="doc.product_qty"/></span><br/>
+
+
+                       </td>
+                       <td style="width: 50%; border-left: 1px solid #ccc; padding-left: 6px;">
+                            <span>Start Date: <span t-field="doc.date_start"/></span><br/>
+                           <span>End Date: <span t-field="doc.date_finished"/></span><br/>
+                           <span>Workcenter: <span t-field="doc.workcenter_id"/></span><br/>
+                           <span>Pincode:6788999</span><br/>
+<!--                                    <table style="width: 50%; font-size: 16px;">-->
+<!--                                        <tr><td style="border: 1px solid #ccc; padding: 6px;"><span>Start Date: <span t-field="doc.date_start"/></span></td></tr>-->
+<!--                                        <tr><td style="border: 1px solid #ccc; padding: 6px;"><span>End Date: <span t-field="doc.date_finished"/></span></td></tr>-->
+<!--                                        <tr><td style="border: 1px solid #ccc; padding: 6px;"><span>Workcenter: <span t-field="doc.workcenter_id"/></span></td></tr>-->
+<!--                                    </table>-->
+                       </td>
+                   </tr>
+              </table>
+
+<!--            <p>-->
+<!--              <strong>MO Number:</strong> <span t-field="doc.name"/><br/>-->
+<!--                <strong>Customer:</strong> <span t-field="doc.user_id"/><br/>-->
+
+<!--              <strong>Product:</strong> <span t-field="doc.product_id.display_name"/><br/>-->
+<!--              <strong>Quantity:</strong> <span t-field="doc.product_qty"/> <span t-field="doc.product_uom_id.name"/>-->
+
+<!--            </p>-->
+
+            <table style="width:100%; border-collapse: collapse; margin-top: 15px;">
+              <thead>
+                <tr style="background-color: #f0f0f0;">
+                  <th style="border: 1px solid #ccc; padding: 8px;">Component</th>
+                  <th style="border: 1px solid #ccc; padding: 8px;">Quantity</th>
+                  <th style="border: 1px solid #ccc; padding: 8px;">UoM</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr t-foreach="doc.move_raw_ids" t-as="move">
+                    <td style="border: 1px solid #ccc; padding: 8px;">
+                      <span t-field="move.product_id"/>
+                    </td>
+                    <td style="border: 1px solid #ccc; padding: 8px;">
+                      <span t-field="move.product_uom_qty"/>
+                    </td>
+                    <td style="border: 1px solid #ccc; padding: 8px;">
+                      <span t-field="move.product_uom.name"/>
+                    </td>
+                  </tr>
+                </tbody>
+
+            </table>
+          </div>
+        </t>
+      </t>
+    </xpath>
+  </template>
+</odoo>

@@ -86,7 +86,7 @@ class ProductTemplate(models.Model):
         return rec
 
     # This write method updates the record and, if wood_type_ids has changed, synchronizes those wood types with the product's attribute lines
-    @api.onchange('wood_type_ids')
+    # @api.onchange('wood_type_ids')
     def write(self, vals):
         res = super().write(vals)
         if 'wood_type_ids' in vals:

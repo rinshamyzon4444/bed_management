@@ -1,0 +1,45 @@
+<odoo>
+
+    <record id="view_mrp_workcenter_form_inherit_costing" model="ir.ui.view">
+        <field name="name">mrp.workcenter.form.inherit.costing</field>
+        <field name="model">mrp.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_workcenter_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//group[@name='costing']/div[@id='costs_hour']" position="after">
+                <label for="cost_per_employee_hour"/>
+                <div id="cost_per_employee_hour">
+                    <field name="cost_per_employee_hour" widget="monetary" class="oe_inline"/> per employee
+                </div>
+            </xpath>
+             <xpath expr="//group[@name='costing']/div[@id='cost_per_employee_hour']" position="after">
+                <label for="expense_account_id"/>
+                <div id="expense_account_id">
+                    <field name="expense_account_id" class="oe_inline" domain="[('deprecated', '=', False)]"/>
+                </div>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_mrp_workcenter_form_inherit_allowed_employees" model="ir.ui.view">
+        <field name="name">mrp.workcenter.form.inherit.allowed.employees</field>
+        <field name="model">mrp.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_workcenter_view"/>
+        <field name="arch" type="xml">
+
+            <!-- Insert after the group that holds Setup and Cleanup time -->
+            <xpath expr="//group[.//field[@name='time_stop']]" position="after">
+                <separator string="Operations"/>
+                <group>
+                    <field name="allowed_employee_ids" widget="many2many_tags"/>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+
+
+
+
+</odoo>

@@ -1,0 +1,49 @@
+<odoo>
+      <record id="mrp_production_workorder_tree_editable_view_inherit_employee" model="ir.ui.view">
+        <field name="name">mrp.production.workorder.tree.inherit.employee</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='workcenter_id']" position="before">
+                <field name="assigned_employee_ids" domain="[('id', 'in', allowed_employee_ids)]" widget="many2many_tags"/>
+            </xpath>
+            <xpath expr="//tree" position="inside">
+                <field name="allowed_employee_ids" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mrp_workorder_form_inherit_employee_user_filter" model="ir.ui.view">
+        <field name="name">mrp.workorder.form.inherit.user.filter</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
+        <field name="arch" type="xml">
+            <!-- Add assigned_user_ids so domain works -->
+            <xpath expr="//form" position="inside">
+                <field name="assigned_user_ids" invisible="1"/>
+            </xpath>
+
+            <!-- Apply domain -->
+            <xpath expr="//field[@name='time_ids']//field[@name='user_id']" position="attributes">
+                <attribute name="domain">[('id', 'in', parent.assigned_user_ids)]</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mrp_workorder_productivity_user_label_to_employee" model="ir.ui.view">
+        <field name="name">mrp.workorder.productivity.user.label.to.employee</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
+        <field name="arch" type="xml">
+
+            <!-- Replace the user_id field in the time_ids O2M -->
+            <xpath expr="//field[@name='time_ids']//field[@name='user_id']" position="replace">
+                <field name="user_id" string="Employee" domain="[('id', 'in', parent.assigned_user_ids)]"/>
+            </xpath>
+
+        </field>
+    </record>
+
+
+
+</odoo>
