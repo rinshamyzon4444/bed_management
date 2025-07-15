@@ -219,7 +219,6 @@
                                                     <br/>
                                                     <br/>
                                                 </t>
-
                                                 <t t-if="(v.qty_available) > 0">
                                                     <span>In Stock</span>
                                                     <br/>
