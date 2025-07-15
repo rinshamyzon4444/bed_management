@@ -1,2 +1,2 @@
 from . import bed
-from  . import addons
+from . import mrp_manufacturing

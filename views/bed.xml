@@ -1,58 +1,59 @@
 <odoo>
-
     <record id="view_product_template_form_inherit_bed" model="ir.ui.view">
         <field name="name">product.template.inherit.bed</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_form_view"/>
         <field name="arch" type="xml">
-
-
-            <xpath expr="//field[@name='type']" position="after">
-                <field name="is_bed"/>
+            <xpath expr="//div[@name='options']/span[1]" position="before">
+                <span class="d-inline-flex">
+                    <field name="is_bed"/>
+                    <label for="is_bed"/>
+                </span>
             </xpath>
-              <xpath expr="//field[@name='taxes_id']" position="after">
-                    <field name="bed_type"/>
-              </xpath>
-               <xpath expr="//field[@name='bed_type']" position="after">
-                    <field name="wood_type"/>
-              </xpath>
+            <xpath expr="//label[@for='list_price']/following-sibling::div[1]" position="after">
+                <label for="wholesale_price"/>
+                <div name="pricing" class="o_row">
+                    <field name="wholesale_price" class="oe_inline" widget='monetary'
+                           options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='product_tag_ids']" position="after">
+                <field name="low_stock_threshold"/>
+            </xpath>
+            <xpath expr="//field[@name='uom_po_id']" position="after">
+                <field name="bed_type" invisible="is_bed==False"/>
+                <field name="wood_type_ids" widget="many2many_tags" invisible="is_bed==False"/>
+                <field name="length" invisible="is_bed==False"/>
+                <field name="width" invisible="is_bed==False"/>
+                <field name="height" invisible="is_bed==False"/>
+            </xpath>
         </field>
     </record>
 
-
-
-
     <record id="product_template_kanban_inherit_bed" model="ir.ui.view">
-      <field name="name">product.template.kanban.inherit.bed</field>
-      <field name="model">product.template</field>
-      <field name="inherit_id" ref="product.product_template_kanban_view"/>
-      <field name="arch" type="xml">
-
-
-        <xpath expr="//field[@name='list_price']" position="before">
-          <div>
-            <field name="bed_type" widget="badge"/>
-          </div>
-        </xpath>
-
-      </field>
+        <field name="name">product.template.kanban.inherit.bed</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_kanban_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='product_lst_price']" position="before">
+                <div invisible="bed_type==False">
+                    Bed Type:
+                    <field name="bed_type" widget="badge"/>
+                </div>
+            </xpath>
+        </field>
     </record>
-
 
     <record id="action_bed_products_only" model="ir.actions.act_window">
         <field name="name">Bed Products</field>
         <field name="res_model">product.template</field>
         <field name="view_mode">tree,form,kanban</field>
-        <field name="domain">[('is_bed','=',True)]</field>
+        <field name="domain">[('is_bed','!=',False)]</field>
     </record>
 
-
-    <menuitem id="menu_bed_root" name="Bed Product Catalog" sequence="10"/>
-
-    <menuitem id="menu_bed_products_root" name="Products" parent="menu_bed_root" sequence="10"/>
-
+    <menuitem id="menu_bed_root" name="Bed Product Management"/>
+    <menuitem id="menu_bed_products_root" name="Products"
+              parent="menu_bed_root" sequence="1"/>
     <menuitem id="menu_bed_products" name="Bed Products"
               parent="menu_bed_products_root" action="action_bed_products_only" sequence="10"/>
-
-
 </odoo>
