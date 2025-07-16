@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+
+        <menuitem id="menu_bed_reporting"
+                  name="Reporting"
+                  parent="menu_bed_root"
+                  sequence="30" />
+
+
+        <record id="action_bed_production_report" model="ir.actions.act_window">
+            <field name="name">Production Report</field>
+            <field name="res_model">mrp.production</field>
+            <field name="view_mode">pivot,graph,list</field>
+            <field name="context">{}</field>
+        </record>
+
+
+        <menuitem id="menu_bed_production_report"
+                  name="Production Analysis"
+                  parent="menu_bed_reporting"
+                  action="action_bed_production_report"
+                  sequence="10"/>
+
+        <record id="action_bed_workorder_report" model="ir.actions.act_window">
+            <field name="name">Work Orders Report</field>
+            <field name="res_model">mrp.workorder</field>
+            <field name="view_mode">pivot,graph,list</field>
+            <field name="context">{}</field>
+        </record>
+
+
+        <menuitem id="menu_bed_workorder_report"
+                  name="Work Orders"
+                  parent="menu_bed_reporting"
+                  action="action_bed_workorder_report"
+                  sequence="20"/>
+
+    </data>
+</odoo>
+

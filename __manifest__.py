@@ -16,11 +16,14 @@
         'views/manufacturing.xml',
         'views/workcenter.xml',
         'views/workorder.xml',
+        'views/reporting.xml',
         'views/report_mrporder.xml',
         'report/product_catalog_report.xml',
         'report/product_catalog_template.xml',
         'report/product_catalog_temp_wholesale.xml',
         'data/ir_cron.xml',
+
+
     ],
     'assets': {
         'web.report_assets_pdf': [
