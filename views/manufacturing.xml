@@ -44,6 +44,7 @@
 
 
 
+
     <menuitem id="menu_bed_mano" name="Manufacturing" parent="menu_bed_root" sequence="10"/>
 
 
@@ -73,3 +74,6 @@
           sequence="4"/>
 
 </odoo>
+
+
+

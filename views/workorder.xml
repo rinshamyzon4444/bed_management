@@ -5,10 +5,10 @@
         <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view"/>
         <field name="arch" type="xml">
             <xpath expr="//tree/field[@name='workcenter_id']" position="before">
-                <field name="assigned_employee_ids" domain="[('id', 'in', allowed_employee_ids)]" widget="many2many_tags"/>
+                <field name="assigned_employee_ids" domain="[('id', 'in', allowed_employee_ids)]" widget="many2many_tags"  optional="show"/>
             </xpath>
             <xpath expr="//tree" position="inside">
-                <field name="allowed_employee_ids" invisible="1"/>
+                <field name="allowed_employee_ids" invisible="0" optional="show"/>
             </xpath>
         </field>
     </record>
