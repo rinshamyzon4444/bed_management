@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_mrp_workorder_custom" inherit_id="mrp.report_mrp_workorder">
+        <xpath expr="//div[@class='page']" position="replace">
+            <div class="oe_structure"/>
+
+            <!-- Title -->
+            <h3 style="text-align: center; color: #2c3e50; font-size: 36px; font-weight: bold; margin-top: 10px;">
+                Work Order Details
+            </h3>
+
+            <!-- Section: Production Information -->
+            <table style="width: 100%; margin-top: 20px; border-collapse: collapse; font-size: 13px; font-family: Arial, sans-serif;">
+                <tr>
+                    <td colspan="2" style="background-color: #f0f8ff; text-align: center; font-weight: bold; font-size: 15px; padding: 10px; border: 1px solid #ccc;">
+                        Production Information
+                    </td>
+                </tr>
+                <tr>
+                    <th style="padding: 6px; border: 1px solid #ccc;">Manufacturing Order</th>
+                    <td style="padding: 6px; border: 1px solid #ccc;"><t t-esc="o.production_id.name"/></td>
+                </tr>
+                <tr>
+                    <th style="padding: 6px; border: 1px solid #ccc;">Quantity to Produce</th>
+                    <td style="padding: 6px; border: 1px solid #ccc;"><t t-esc="o.qty_production"/></td>
+                </tr>
+                <tr>
+                    <th style="padding: 6px; border: 1px solid #ccc;">Product</th>
+                    <td style="padding: 6px; border: 1px solid #ccc;"><t t-esc="o.production_id.product_id.display_name"/></td>
+                </tr>
+                <tr>
+                    <th style="padding: 6px; border: 1px solid #ccc;">Bill of Materials</th>
+                    <td style="padding: 6px; border: 1px solid #ccc;"><t t-esc="o.production_id.bom_id.display_name"/></td>
+                </tr>
+            </table>
+
+            <!-- Section: Work Order Details -->
+            <table style="width: 100%; margin-top: 20px; border-collapse: collapse; font-size: 13px; font-family: Arial, sans-serif;">
+                <tr>
+                    <td colspan="2" style="background-color: #f0f8ff; text-align: center; font-weight: bold; font-size: 15px; padding: 10px; border: 1px solid #ccc;">
+                        Work Order Information
+                    </td>
+                </tr>
+                <tr>
+                    <th style="padding: 6px; border: 1px solid #ccc;">Work Order</th>
+                    <td style="padding: 6px; border: 1px solid #ccc;"><t t-esc="o.name"/></td>
+                </tr>
+                <tr>
+                    <th style="padding: 6px; border: 1px solid #ccc;">Product</th>
+                    <td style="padding: 6px; border: 1px solid #ccc;"><t t-esc="o.product_id.display_name"/></td>
+                </tr>
+                <tr>
+                    <th style="padding: 6px; border: 1px solid #ccc;">Quantity</th>
+                    <td style="padding: 6px; border: 1px solid #ccc;">
+                        <t t-esc="o.qty_production"/> <t t-esc="o.product_uom_id.name"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="padding: 6px; border: 1px solid #ccc;">Workcenter</th>
+                    <td style="padding: 6px; border: 1px solid #ccc;"><t t-esc="o.workcenter_id.name"/></td>
+                </tr>
+                <tr>
+                    <th style="padding: 6px; border: 1px solid #ccc;">Operation</th>
+                    <td style="padding: 6px; border: 1px solid #ccc;"><t t-esc="o.name"/></td>
+                </tr>
+                <tr>
+                    <th style="padding: 6px; border: 1px solid #ccc;">Expected Duration (min)</th>
+                    <td style="padding: 6px; border: 1px solid #ccc;"><t t-esc="o.duration_expected"/></td>
+                </tr>
+                <tr>
+                    <th style="padding: 6px; border: 1px solid #ccc;">Real Duration (min)</th>
+                    <td style="padding: 6px; border: 1px solid #ccc;"><t t-esc="o.duration"/></td>
+                </tr>
+                <tr>
+                    <th style="padding: 6px; border: 1px solid #ccc;">Assigned Employees</th>
+                    <td style="padding: 6px; border: 1px solid #ccc;">
+                        <t t-if="o.assigned_employee_ids">
+                            <t t-set="employee_names" t-value="' , '.join([e.name for e in o.assigned_employee_ids])"/>
+                            <t t-esc="employee_names"/>
+                        </t>
+                        <t t-else="">N/A</t>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Section: Barcode -->
+<!--            <table style="width: 100%; margin-top: 25px; border-collapse: collapse;">-->
+<!--                <tr>-->
+<!--                    <td colspan="2" style="background-color: #f0f8ff; text-align: center; font-weight: bold; font-size: 15px; padding: 10px; border: 1px solid #ccc;">-->
+<!--                        Work Order Barcode-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td colspan="2" style="text-align: center; padding: 10px;">-->
+<!--                        <div class="barcode"-->
+<!--                             data-barcode="o.name"-->
+<!--                             data-barcode-type="Code128"-->
+<!--                             data-barcode-width="2"-->
+<!--                             data-barcode-height="60"-->
+<!--                             data-barcode-margin="5"/>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--            </table>-->
+                 <div style="border-top: 1px solid #ccc; margin-top: 40px; padding-top: 10px; font-size: 11px; color: #777;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Generated by:</span>
+                        <span>Page <span class="page"/> of <span class="topage"/></span>
+                    </div>
+                    <div style="text-align: center; margin-top: 5px;">
+                        © <t t-esc="user.company_id.name"/> – Confidential
+                    </div>
+                </div>
+
+
+        </xpath>
+    </template>
+</odoo>

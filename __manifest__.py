@@ -21,8 +21,9 @@
         'report/product_catalog_report.xml',
         'report/product_catalog_template.xml',
         'report/product_catalog_temp_wholesale.xml',
+        'report/workorder_pdf.xml',
         'data/ir_cron.xml',
-
+        'views/dashboard.xml',
 
     ],
     'assets': {
