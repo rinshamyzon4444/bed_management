@@ -39,7 +39,37 @@
         </field>
     </record>
 
+     <record id="view_workcenter_form_inherit_custom" model="ir.ui.view">
+        <field name="name">mrp.workcenter.form.inherit.outsider</field>
+        <field name="model">mrp.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_workcenter_view"/>
+        <field name="arch" type="xml">
 
+            <field name="name" position="after">
+                <field name="outsider"/>
+            </field>
 
+             <xpath expr="//field[@name='outsider']" position="after">
+                <field name="manufacturer" invisible="outsider==False"/>
+                <field name="manufacturer_address" invisible="outsider==False"/>
+             </xpath>
+             <xpath expr="//field[@name='resource_calendar_id']" position="after">
+                      <field name="start_date" invisible="outsider==False"/>
+                <field name="end_date" invisible="outsider==False"/>
+             </xpath>
+            <xpath expr="//group[@name='costing']/div[@id='cost_per_employee_hour']" position="after">
+                <label for="unit_per_cost" invisible="outsider==False"/>
+                <div id="unit_per_cost" invisible="outsider==False">
+                    <field name="unit_per_cost" invisible="outsider==False"/>
+                </div>
+             </xpath>
+
+        </field>
+    </record>
 
 </odoo>
+
+
+
+
+
