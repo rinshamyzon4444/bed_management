@@ -1,19 +1,60 @@
 <odoo>
     <data>
-
         <menuitem id="menu_bed_reporting"
                   name="Reporting"
                   parent="menu_bed_root"
-                  sequence="30" />
+                  sequence="30"/>
 
-
-        <record id="action_bed_production_report" model="ir.actions.act_window">
-            <field name="name">Production Report</field>
-            <field name="res_model">mrp.production</field>
-            <field name="view_mode">pivot,graph,list</field>
-            <field name="context">{}</field>
+        <record id="mrp_production_search_view" model="ir.ui.view">
+            <field name="name">mrp.production</field>
+            <field name="model">mrp.production</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter string="End Date" name="filter_date_finished" date="date_finished" default_period="this_year"/>
+                    <field name="product_id" string="Product"/>
+                    <field name="name" string="Manufacturing Order"/>
+                    <group string="Group by">
+                        <filter string="Product" name="product_id" context="{'group_by': 'product_id'}"/>
+                        <filter string="End Date" name="date_finished" context="{'group_by': 'date_finished'}"/>
+                    </group>
+                </search>
+            </field>
         </record>
 
+        <record id="mrp_report_graph_view" model="ir.ui.view">
+            <field name="name">mrp.report.view.graph</field>
+            <field name="model">mrp.production</field>
+            <field name="arch" type="xml">
+                <graph type="line" sample="1">
+                    <field name="date_finished" interval="week"/>
+                    <field name="product_id" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="mrp_report_pivot_view" model="ir.ui.view">
+            <field name="name">mrp.report.view.pivot</field>
+            <field name="model">mrp.production</field>
+            <field name="arch" type="xml">
+                <pivot string="Order Overview" sample="1">
+                    <field name="product_id" type="row"/>
+                    <field name="qty_produced" type="measure" string="Quantity Produced"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="action_bed_production_report" model="ir.actions.act_window">
+            <field name="name">Production Analysis</field>
+            <field name="res_model">mrp.production</field>
+            <field name="view_mode">graph,pivot</field>
+            <field name="search_view_id" ref="bed_management.mrp_production_search_view"/>
+            <field name="context">{'search_default_filter_date_finished': True}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No data yet!
+                </p>
+            </field>
+        </record>
 
         <menuitem id="menu_bed_production_report"
                   name="Production Analysis"
@@ -24,17 +65,14 @@
         <record id="action_bed_workorder_report" model="ir.actions.act_window">
             <field name="name">Work Orders Report</field>
             <field name="res_model">mrp.workorder</field>
-            <field name="view_mode">pivot,graph,list</field>
+            <field name="view_mode">graph,pivot,list</field>
             <field name="context">{}</field>
         </record>
-
 
         <menuitem id="menu_bed_workorder_report"
                   name="Work Orders"
                   parent="menu_bed_reporting"
                   action="action_bed_workorder_report"
                   sequence="20"/>
-
     </data>
 </odoo>
-
