@@ -23,8 +23,11 @@
         'report/product_catalog_temp_wholesale.xml',
         'report/workorder_pdf.xml',
         'data/ir_cron.xml',
+<<<<<<< HEAD
         'views/dashboard.xml',
 
+=======
+>>>>>>> origin/main
     ],
     'assets': {
         'web.report_assets_pdf': [

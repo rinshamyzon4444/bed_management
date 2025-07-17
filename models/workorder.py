@@ -43,4 +43,3 @@ class MrpWorkorder(models.Model):
         for workorder in self:
             workorder.assigned_user_ids = workorder.assigned_employee_ids.mapped('user_id')
 
-
