@@ -24,9 +24,6 @@
         'report/workorder_pdf.xml',
         'data/ir_cron.xml',
         'views/dashboard.xml',
-
-
-
     ],
     'assets': {
         'web.report_assets_pdf': [

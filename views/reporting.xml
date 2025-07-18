@@ -1,19 +1,66 @@
 <odoo>
     <data>
-
         <menuitem id="menu_bed_reporting"
                   name="Reporting"
                   parent="menu_bed_root"
-                  sequence="30" />
+                  sequence="30"/>
 
-
-        <record id="action_bed_production_report" model="ir.actions.act_window">
-            <field name="name">Production Report</field>
-            <field name="res_model">mrp.production</field>
-            <field name="view_mode">pivot,graph,list</field>
-            <field name="context">{}</field>
+        <record id="view_bed_raw_material_search" model="ir.ui.view">
+            <field name="name">stock.move.search.view</field>
+            <field name="model">stock.move</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter name="filter_date" string="End Date" date="date" default_period="this_year"/>
+                    <field name="product_id" string="Product"/>
+                    <field name="bed_product_id" string="Bed Product"/>
+                    <field name="name" string="Manufacturing Order"/>
+                    <group string="Group by">
+                        <filter string="Product" name="product_id" context="{'group_by': 'product_id'}"/>
+                        <filter name="group_by_date" string="Date" context="{'group_by': 'date'}"/>
+                        <filter name="group_by_bed" string="Bed Type" context="{'group_by': 'bed_product_id'}"/>
+                    </group>
+                </search>
+            </field>
         </record>
 
+        <!-- Pivot View -->
+        <record id="view_bed_raw_material_pivot" model="ir.ui.view">
+            <field name="name">stock.move.raw.material.pivot</field>
+            <field name="model">stock.move</field>
+            <field name="arch" type="xml">
+                <pivot string="Raw Material Consumption by Bed Type">
+                    <field name="bed_product_id" type="col" string="Bed Type"/>
+                    <field name="product_id" type="row" string="Raw Material"/>
+                    <field name="quantity" type="measure" string="Quantity Consumed"/>
+                </pivot>
+            </field>
+        </record>
+
+        <!-- Graph View -->
+        <record id="view_bed_raw_material_graph" model="ir.ui.view">
+            <field name="name">stock.move.raw.material.graph</field>
+            <field name="model">stock.move</field>
+            <field name="arch" type="xml">
+                <graph string="Raw Material Usage Graph" type="bar">
+                    <field name="bed_product_id" type="row"/>
+                    <field name="quantity" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_bed_production_report" model="ir.actions.act_window">
+            <field name="name">Production Analysis</field>
+            <field name="res_model">stock.move</field>
+            <field name="view_mode">graph,pivot,tree</field>
+            <field name="search_view_id" ref="bed_management.view_bed_raw_material_search"/>
+            <field name="context">{'search_default_filter_date': True}</field>
+            <field name="domain">[('raw_material_production_id', '!=', False)]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No data yet!
+                </p>
+            </field>
+        </record>
 
         <menuitem id="menu_bed_production_report"
                   name="Production Analysis"
@@ -24,17 +71,14 @@
         <record id="action_bed_workorder_report" model="ir.actions.act_window">
             <field name="name">Work Orders Report</field>
             <field name="res_model">mrp.workorder</field>
-            <field name="view_mode">pivot,graph,list</field>
+            <field name="view_mode">graph,pivot,list</field>
             <field name="context">{}</field>
         </record>
-
 
         <menuitem id="menu_bed_workorder_report"
                   name="Work Orders"
                   parent="menu_bed_reporting"
                   action="action_bed_workorder_report"
                   sequence="20"/>
-
     </data>
 </odoo>
-
