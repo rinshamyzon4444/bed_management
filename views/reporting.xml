@@ -5,50 +5,56 @@
                   parent="menu_bed_root"
                   sequence="30"/>
 
-        <record id="mrp_production_search_view" model="ir.ui.view">
-            <field name="name">mrp.production</field>
-            <field name="model">mrp.production</field>
+        <record id="view_bed_raw_material_search" model="ir.ui.view">
+            <field name="name">stock.move.search.view</field>
+            <field name="model">stock.move</field>
             <field name="arch" type="xml">
                 <search>
-                    <filter string="End Date" name="filter_date_finished" date="date_finished" default_period="this_year"/>
+                    <filter name="filter_date" string="End Date" date="date" default_period="this_year"/>
                     <field name="product_id" string="Product"/>
+                    <field name="bed_product_id" string="Bed Product"/>
                     <field name="name" string="Manufacturing Order"/>
                     <group string="Group by">
                         <filter string="Product" name="product_id" context="{'group_by': 'product_id'}"/>
-                        <filter string="End Date" name="date_finished" context="{'group_by': 'date_finished'}"/>
+                        <filter name="group_by_date" string="Date" context="{'group_by': 'date'}"/>
+                        <filter name="group_by_bed" string="Bed Type" context="{'group_by': 'bed_product_id'}"/>
                     </group>
                 </search>
             </field>
         </record>
 
-        <record id="mrp_report_graph_view" model="ir.ui.view">
-            <field name="name">mrp.report.view.graph</field>
-            <field name="model">mrp.production</field>
+        <!-- Pivot View -->
+        <record id="view_bed_raw_material_pivot" model="ir.ui.view">
+            <field name="name">stock.move.raw.material.pivot</field>
+            <field name="model">stock.move</field>
             <field name="arch" type="xml">
-                <graph type="line" sample="1">
-                    <field name="date_finished" interval="week"/>
-                    <field name="product_id" type="measure"/>
-                </graph>
+                <pivot string="Raw Material Consumption by Bed Type">
+                    <field name="bed_product_id" type="col" string="Bed Type"/>
+                    <field name="product_id" type="row" string="Raw Material"/>
+                    <field name="quantity" type="measure" string="Quantity Consumed"/>
+                </pivot>
             </field>
         </record>
 
-        <record id="mrp_report_pivot_view" model="ir.ui.view">
-            <field name="name">mrp.report.view.pivot</field>
-            <field name="model">mrp.production</field>
+        <!-- Graph View -->
+        <record id="view_bed_raw_material_graph" model="ir.ui.view">
+            <field name="name">stock.move.raw.material.graph</field>
+            <field name="model">stock.move</field>
             <field name="arch" type="xml">
-                <pivot string="Order Overview" sample="1">
-                    <field name="product_id" type="row"/>
-                    <field name="qty_produced" type="measure" string="Quantity Produced"/>
-                </pivot>
+                <graph string="Raw Material Usage Graph" type="bar">
+                    <field name="bed_product_id" type="row"/>
+                    <field name="quantity" type="measure"/>
+                </graph>
             </field>
         </record>
 
         <record id="action_bed_production_report" model="ir.actions.act_window">
             <field name="name">Production Analysis</field>
-            <field name="res_model">mrp.production</field>
-            <field name="view_mode">graph,pivot</field>
-            <field name="search_view_id" ref="bed_management.mrp_production_search_view"/>
-            <field name="context">{'search_default_filter_date_finished': True}</field>
+            <field name="res_model">stock.move</field>
+            <field name="view_mode">graph,pivot,tree</field>
+            <field name="search_view_id" ref="bed_management.view_bed_raw_material_search"/>
+            <field name="context">{'search_default_filter_date': True}</field>
+            <field name="domain">[('raw_material_production_id', '!=', False)]</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     No data yet!
