@@ -19,18 +19,6 @@ class MrpWorkorder(models.Model):
         readonly=True
     )
 
-    # assigned_user_ids = fields.Many2many(
-    #     'res.users',
-    #     compute='_compute_assigned_user_ids',
-    #     string='Assigned Users',
-    #     store=True  # 👈 Important
-    # )
-    #
-    # @api.depends('assigned_employee_ids.user_id')
-    # def _compute_assigned_user_ids(self):
-    #     for workorder in self:
-    #         workorder.assigned_user_ids = workorder.assigned_employee_ids.mapped('user_id')
-
     assigned_user_ids = fields.Many2many(
         'res.users',
         compute='_compute_assigned_user_ids',
@@ -42,4 +30,16 @@ class MrpWorkorder(models.Model):
     def _compute_assigned_user_ids(self):
         for workorder in self:
             workorder.assigned_user_ids = workorder.assigned_employee_ids.mapped('user_id')
+
+# Quality check in workorder
+
+
+    inspection_result = fields.Selection([
+        ('pass', 'Pass'),
+        ('fail', 'Fail'),
+        ('measure', 'Measured')
+    ], string="Inspection Result")
+    inspection_notes = fields.Text("Inspection Notes")
+    inspection_image = fields.Binary("Inspection Image")
+
 
