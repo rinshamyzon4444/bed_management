@@ -7,5 +7,6 @@ class MrpReport(models.Model):
         'product.product',
         string='Bed Type',
         related='raw_material_production_id.product_id',
-        store=True
+        store=True,
+        default=False
     )
