@@ -47,11 +47,10 @@ class ProductTemplate(models.Model):
 
     # Searches for an attribute in product.attribute. If found, it returns that attribute else it creates a new attribute with the name "Wood Type"
     def _ensure_wood_type_attribute(self):
-        attribute = self.env['product.attribute'].search([('name', '=', 'wood_type')], limit=1)
+        attribute = self.env['product.attribute'].search([('name', 'ilike', 'wood_type')], limit=1)
         if not attribute:
             attribute = self.env['product.attribute'].create({
                 'name': 'Wood Type',
-                'attribute_code': 'wood_type',
                 'create_variant': 'always',
             })
         return attribute

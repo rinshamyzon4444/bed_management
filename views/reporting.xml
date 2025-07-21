@@ -15,9 +15,10 @@
                     <field name="bed_product_id" string="Bed Product"/>
                     <field name="name" string="Manufacturing Order"/>
                     <group string="Group by">
-                        <filter string="Product" name="product_id" context="{'group_by': 'product_id'}"/>
+                        <filter name="group_by_bed" string="Bed Type Products"
+                                context="{'group_by': 'bed_product_id'}"/>
+                        <filter string="Raw Products" name="product_id" context="{'group_by': 'product_id'}"/>
                         <filter name="group_by_date" string="Date" context="{'group_by': 'date'}"/>
-                        <filter name="group_by_bed" string="Bed Type" context="{'group_by': 'bed_product_id'}"/>
                     </group>
                 </search>
             </field>
@@ -30,6 +31,7 @@
             <field name="arch" type="xml">
                 <pivot string="Raw Material Consumption by Bed Type">
                     <field name="bed_product_id" type="col" string="Bed Type"/>
+                    <field name="date" type="row" interval="day"/>
                     <field name="product_id" type="row" string="Raw Material"/>
                     <field name="quantity" type="measure" string="Quantity Consumed"/>
                 </pivot>
@@ -42,6 +44,7 @@
             <field name="model">stock.move</field>
             <field name="arch" type="xml">
                 <graph string="Raw Material Usage Graph" type="bar">
+                    <field name="date" type="col" interval="day"/>
                     <field name="bed_product_id" type="row"/>
                     <field name="quantity" type="measure"/>
                 </graph>
