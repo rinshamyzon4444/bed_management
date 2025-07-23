@@ -20,7 +20,7 @@
         <field name="arch" type="xml">
             <!-- Add assigned_user_ids so domain works -->
             <xpath expr="//form" position="inside">
-                <field name="assigned_user_ids" invisible="1"/>
+                <field name="assigned_user_ids" invisible="0"/>
             </xpath>
 
             <!-- Apply domain -->
@@ -43,5 +43,25 @@
 
         </field>
     </record>
+
+<!--    quality check xml in workorder-->
+
+    <record id="mrp_workorder_form_inherit_quality" model="ir.ui.view">
+        <field name="name">mrp.workorder.form.inherit.quality</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Quality Check">
+                    <group>
+                        <field name="inspection_result"/>
+                        <field name="inspection_notes"/>
+                        <field name="inspection_image" widget="image"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
 
 </odoo>
