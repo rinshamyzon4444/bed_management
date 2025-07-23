@@ -47,7 +47,7 @@ class ProductTemplate(models.Model):
 
     # Searches for an attribute in product.attribute. If found, it returns that attribute else it creates a new attribute with the name "Wood Type"
     def _ensure_wood_type_attribute(self):
-        attribute = self.env['product.attribute'].search([('name', 'ilike', 'wood_type')], limit=1)
+        attribute = self.env['product.attribute'].search([('name', 'ilike', 'wood type')], limit=1)
         if not attribute:
             attribute = self.env['product.attribute'].create({
                 'name': 'Wood Type',
@@ -67,14 +67,18 @@ class ProductTemplate(models.Model):
 
             wood_values = template.wood_type_ids.filtered(lambda v: v.attribute_id.id == attribute.id)
 
-            if line:
-                line.write({'value_ids': [(6, 0, wood_values.ids)]})
+            if wood_values:
+                if line:
+                    line.write({'value_ids': [(6, 0, wood_values.ids)]})
+                else:
+                    self.env['product.template.attribute.line'].create({
+                        'product_tmpl_id': template.id,
+                        'attribute_id': attribute.id,
+                        'value_ids': [(6, 0, wood_values.ids)],
+                    })
             else:
-                self.env['product.template.attribute.line'].create({
-                    'product_tmpl_id': template.id,
-                    'attribute_id': attribute.id,
-                    'value_ids': [(6, 0, wood_values.ids)],
-                })
+                if line:
+                    line.unlink()
 
     # The create method overrides the default create behavior to sync the wood_type_ids with attribute lines after a new product template is created.
     @api.model
