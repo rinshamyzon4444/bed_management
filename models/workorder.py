@@ -1,4 +1,5 @@
 from odoo import models, fields , api
+from odoo.exceptions import UserError
 
 class MrpWorkorder(models.Model):
     _inherit = 'mrp.workorder'
@@ -41,5 +42,13 @@ class MrpWorkorder(models.Model):
     ], string="Inspection Result")
     inspection_notes = fields.Text("Inspection Notes")
     inspection_image = fields.Binary("Inspection Image")
+
+
+    def write(self, vals):
+        if vals.get('state') == 'done':
+            for workorder in self:
+                if workorder.inspection_result == 'fail':
+                    raise UserError("Cannot complete workorder. Quality check failed.")
+        return super(MrpWorkorder, self).write(vals)
 
 

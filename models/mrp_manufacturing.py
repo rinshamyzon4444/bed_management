@@ -39,3 +39,15 @@ class MrpProduction(models.Model):
         """
         mo = self.env['mrp.production'].browse(self.env.context.get('order_id'))
         return mo.with_context(child_field='move_raw_ids').action_add_from_catalog()
+
+ # quality check failer in mo
+
+    def write(self, vals):
+        # Intercept MO status change
+        if vals.get('state') == 'done':
+            for mo in self:
+                for wo in mo.workorder_ids:
+                    if wo.inspection_result == 'fail':
+                        raise exceptions.UserError(f"Cannot complete MO. Workorder {wo.name} failed inspection.")
+        return super(MrpProduction, self).write(vals)
+
