@@ -42,12 +42,18 @@ class MrpProduction(models.Model):
 
  # quality check failer in mo
 
+
     def write(self, vals):
-        # Intercept MO status change
+        # When MO is being marked as done
         if vals.get('state') == 'done':
             for mo in self:
-                for wo in mo.workorder_ids:
-                    if wo.inspection_result == 'fail':
-                        raise exceptions.UserError(f"Cannot complete MO. Workorder {wo.name} failed inspection.")
-        return super(MrpProduction, self).write(vals)
+                failed_workorders = mo.workorder_ids.filtered(lambda w: w.inspection_result == 'fail')
+                if failed_workorders:
+                    failed_names = "\n".join(f"- {wo.name}" for wo in failed_workorders)
+                    raise UserError(_(
+                        "Cannot complete Manufacturing Order.\n"
+                        "The following Work Orders failed inspection:(Quality Check)\n%s"
+                    ) % failed_names)
+        return super().write(vals)
+
 

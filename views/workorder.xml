@@ -64,4 +64,16 @@
     </record>
 
 
+    <record id="view_mrp_workorder_tree_inherit" model="ir.ui.view">
+        <field name="name">mrp.workorder.tree.inherit.quality</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="inspection_result"/>
+            </xpath>
+        </field>
+    </record>
+
+
 </odoo>

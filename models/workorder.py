@@ -1,4 +1,4 @@
-from odoo import models, fields , api
+from odoo import models, fields , api , _
 from odoo.exceptions import UserError
 
 class MrpWorkorder(models.Model):
@@ -44,11 +44,22 @@ class MrpWorkorder(models.Model):
     inspection_image = fields.Binary("Inspection Image")
 
 
+
     def write(self, vals):
+        res = super().write(vals)
+
         if vals.get('state') == 'done':
             for workorder in self:
-                if workorder.inspection_result == 'fail':
-                    raise UserError("Cannot complete workorder. Quality check failed.")
-        return super(MrpWorkorder, self).write(vals)
+                # Get all workorders from the same MO
+                related_workorders = workorder.production_id.workorder_ids
+                failed_workorders = related_workorders.filtered(lambda w: w.inspection_result == 'fail')
+                if failed_workorders:
+                    failed_names = "\n".join(f"- {w.name}" for w in failed_workorders)
+                    raise UserError(_(
+                        "Cannot complete Manufacturing Order.\n"
+                        "The following Work Orders failed inspection:(Quality Check)\n%s"
+                    ) % failed_names)
+
+        return res
 
 
