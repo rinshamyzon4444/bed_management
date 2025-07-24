@@ -41,13 +41,6 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-
-
-
-
-
-
-
     <menuitem id="menu_bed_mano" name="Manufacturing" parent="menu_bed_root" sequence="10"/>
 
 
@@ -75,5 +68,5 @@
           parent="menu_bed_mano"
           action="action_bed_work_center"
           sequence="4"/>
-
+    
 </odoo>

@@ -5,7 +5,7 @@
         <menuitem id="menu_bed_dashboard_root"
                   name="Dashboard"
                   parent="menu_bed_root"
-                  sequence="20" />
+                  sequence="0" />
 
         <record id="action_bed_daily_production" model="ir.actions.act_window">
             <field name="name">Daily Production</field>
@@ -18,7 +18,7 @@
                   name="Daily Production"
                   parent="menu_bed_dashboard_root"
                   action="action_bed_daily_production"
-                  sequence="10"/>
+                  sequence="2"/>
 
     </data>
 
@@ -33,6 +33,6 @@
                   name="Manufacturing Order Status"
                   parent="menu_bed_dashboard_root"
                   action="action_bed_mo_status"
-                  sequence="20"/>
+                  sequence="3"/>
 
 </odoo>
