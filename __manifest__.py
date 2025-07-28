@@ -8,9 +8,10 @@
     'author': "Sidmec",
     'category': 'Uncategorized',
     'version': '17.0.0.0',
-    "depends": ['base', 'sale', 'sale_management', 'account', 'product', 'stock', 'mrp','hr'],
+    "depends": ['base', 'sale', 'sale_management', 'account', 'product', 'stock', 'mrp', 'hr'],
     "data": [
         'security/ir.model.access.csv',
+        'views/bed_dashboard.xml',
         'views/bed.xml',
         'views/bom_inherit.xml',
         'views/manufacturing.xml',

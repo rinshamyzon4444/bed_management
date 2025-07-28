@@ -5,7 +5,7 @@
         <menuitem id="menu_bed_dashboard_root"
                   name="Dashboard"
                   parent="menu_bed_root"
-                  sequence="0" />
+                  sequence="0"/>
 
         <record id="action_bed_daily_production" model="ir.actions.act_window">
             <field name="name">Daily Production</field>
