@@ -14,6 +14,7 @@
             <field name="context">{'group_by': 'date_start'}</field>
         </record>
 
+
         <menuitem id="menu_bed_daily_production"
                   name="Daily Production"
                   parent="menu_bed_dashboard_root"
@@ -34,5 +35,7 @@
                   parent="menu_bed_dashboard_root"
                   action="action_bed_mo_status"
                   sequence="3"/>
+
+
 
 </odoo>
