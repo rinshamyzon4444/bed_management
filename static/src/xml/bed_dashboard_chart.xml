@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <t t-name="bed_management.bed_product_dashboard_template">
-        <div class="container" style="max-height: 90vh; overflow-y: auto;">
+        <div class="o_bed_dashboard_scroll">
+
             <!-- Dashboard Header -->
             <div class="text-center my-4">
                 <h1>📦 Bed Product Dashboard</h1>
@@ -132,5 +133,25 @@
             <!--                        </div>-->
 
         </div>
+
+<!--        graph-->
+            <div class="o_bed_charts" style="margin-top: 30px;">
+                <!-- Top Row: Bar and Line -->
+                <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                    <!-- Bar Chart -->
+                    <div style="flex: 1; min-width: 300px;">
+                        <canvas id="bed_bar_chart"></canvas>
+                    </div>
+                    <!-- Line Chart -->
+                    <div style="flex: 1; min-width: 300px;">
+                        <canvas id="bed_line_chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Second Row: Pie Chart full width -->
+                <div style="margin-top: 30px;">
+                    <canvas id="bed_pie_chart" style="width: 100%; max-width: 700px; margin: auto; display: block;"></canvas>
+                </div>
+            </div>
     </t>
 </odoo>
