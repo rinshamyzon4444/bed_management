@@ -51,3 +51,4 @@ class BedDashboardChart extends Component {
 BedDashboardChart.template = "bed_dashboard.ChartContainer";
 
 registry.category("actions").add("bed_dashboard_chart", BedDashboardChart);
+

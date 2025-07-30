@@ -35,8 +35,8 @@
             'bed_management/static/src/js/bed_dashboard_chart.js',
             'bed_management/static/src/xml/bed_dashboard_chart.xml',
         ],
-
     },
+
     'license': 'LGPL-3',
     'installable': True,
     'auto_install': False,
