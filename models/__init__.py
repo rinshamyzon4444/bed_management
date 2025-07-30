@@ -4,4 +4,4 @@ from . import workcenter
 from . import workorder
 from . import mrpreport
 from . import saleorder
-from . import dashboard
+from . import bed_dashboard

@@ -8,11 +8,11 @@
     'author': "Sidmec",
     'category': 'Uncategorized',
     'version': '17.0.0.0',
-    "depends": ['base', 'sale', 'sale_management', 'account', 'product', 'stock', 'mrp', 'hr'],
+    "depends": ['base', 'web', 'sale', 'sale_management', 'account', 'product', 'stock', 'mrp', 'hr'],
     "data": [
         'security/ir.model.access.csv',
-        'views/bed_dashboard.xml',
         'views/bed.xml',
+        'views/bed_dashboard_menu.xml',
         'views/bom_inherit.xml',
         'views/manufacturing.xml',
         'views/workcenter.xml',
@@ -27,6 +27,11 @@
         'views/dashboard.xml',
     ],
     'assets': {
+        'web.assets_backend': [
+            'https://cdn.jsdelivr.net/npm/chart.js',
+            'bed_management/static/src/js/bed_dashboard_chart.js',
+            'bed_management/static/src/xml/bed_dashboard_chart.xml',
+        ],
         'web.report_assets_pdf': [
             'bed_management/static/src/scss/catalog_style_pdf.scss',
         ],

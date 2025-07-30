@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_bed_product_dashboard" model="ir.actions.client">
+        <field name="name">Bed Product Dashboard</field>
+        <field name="tag">bed_product_dashboard_tag</field>
+    </record>
+
+    <menuitem id="menu_bed_dashboard"
+              name="Bed Dashboard"
+              parent="menu_bed_root"
+              action="action_bed_product_dashboard"
+              sequence="0"/>
+</odoo>

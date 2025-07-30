@@ -1,2 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_bed_dashboard,access_bed_dashboard,model_bed_dashboard,"",1,1,1,1
+access_bed_product_dashboard,access_bed_product_dashboard,model_bed_product_dashboard,,1,1,1,1
