@@ -3,7 +3,7 @@
 
 
         <menuitem id="menu_bed_dashboard_root"
-                  name="Dashboard"
+                  name="Overview"
                   parent="menu_bed_root"
                   sequence="0"/>
 
