@@ -1,6 +1,7 @@
 .o_img {
     width: 100%;
     height: 400px;
+    overflow-y: auto;
     object-fit: cover;
     display: flex;
     flex-wrap: wrap;
