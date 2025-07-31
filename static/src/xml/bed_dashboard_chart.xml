@@ -143,9 +143,60 @@
 
        <!-- Production Volume Chart by Date -->
             <div class="mt-4 p-3 shadow rounded bg-white">
-                <h4 class="text-center mb-3">📅 Production Orders by Date</h4>
+                <h4 class="text-center mb-3"> Production Orders by Date</h4>
                 <canvas id="production_volume_chart" style="max-height: 400px;"></canvas>
            </div>
+
+
+            <!-- Raw Material Line and Pie Charts -->
+
+            <div style="display: flex; gap: 30px; justify-content: space-between; margin-top: 30px;">
+
+                <!-- Line Chart Container -->
+                <div style="flex: 1; min-width: 700px; height: 500px;">
+                    <h5 class="text-center mb-2"> Raw Material Usage (Line)</h5>
+                    <canvas id="raw_material_line_chart"></canvas>
+                </div>
+
+
+
+                <!-- Pie Chart -->
+                <div style="flex: 1; min-width: 500px; max-width: 50%; height: 500px;">
+                    <h4 class="text-center mb-2">Raw Material Usage by Bed Type</h4>
+                    <canvas id="raw_material_pie_chart" height="400"></canvas>
+                </div>
+            </div>
+
+<!--          list view work orders-->
+            <div class="my-5">
+                <h4 class="mb-3"> Latest Work Orders</h4>
+                <table class="table table-bordered table-striped shadow-sm">
+                    <thead class="table-light">
+                        <tr>
+                            <th>MO</th>
+                            <th>Name</th>
+                            <th>Product</th>
+                            <th>State</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="latestWorkorders.records" t-as="wo" t-key="wo.id">
+                            <tr>
+                                <td><t t-esc="wo.mo_name"/></td>
+                                <td><t t-esc="wo.name" /></td>
+                                <td><t t-esc="wo.product_name" /></td>
+                                <td><t t-esc="wo.state" /></td>
+                                <td><t t-esc="wo.date_start" /></td>
+                                <td><t t-esc="wo.date_end" /></td>
+                            </tr>
+                        </t>
+                    </tbody>
+
+                </table>
+            </div>
+
 
 
         </div>

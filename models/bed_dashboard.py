@@ -54,3 +54,60 @@ class BedProductDashboard(models.Model):
             'labels': labels,
             'data': data
         }
+
+    # raw material by bed type
+    @api.model
+    def get_raw_material_data(self):
+        productions = self.env['mrp.production'].search([('state', '=', 'done')])
+        raw_data = {}
+        pie_total = {}
+
+        for production in productions:
+            bed_type = production.product_id.name
+            for move in production.move_raw_ids.filtered(lambda m: m.state == 'done'):
+                material = move.product_id.name
+                qty = move.product_uom_qty
+
+                raw_data.setdefault(material, {})
+                raw_data[material][bed_type] = raw_data[material].get(bed_type, 0) + qty
+
+                pie_total[bed_type] = pie_total.get(bed_type, 0) + qty
+
+        # Prepare line chart format
+        labels = sorted(set(bt for mat in raw_data.values() for bt in mat))
+        datasets = []
+        for material, values in raw_data.items():
+            dataset = {
+                'label': material,
+                'data': [values.get(label, 0) for label in labels],
+                'fill': False,
+            }
+            datasets.append(dataset)
+
+        # PIE CHART
+        pie = {
+            'labels': list(pie_total.keys()),
+            'data': list(pie_total.values()),
+            'colors': ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF']
+        }
+
+        return {
+            'labels': labels,
+            'datasets': datasets,
+            'pie': pie,
+        }
+
+    @api.model
+    def get_latest_workorders(self):
+        workorders = self.env['mrp.workorder'].search([], order='id desc', limit=10)
+        return [{
+            'id': wo.id,
+            'name': wo.name,
+            'mo_name': wo.production_id.name if wo.production_id else "",
+            'product_name': wo.production_id.product_id.name if wo.production_id and wo.production_id.product_id else "",
+            'workcenter_id': wo.workcenter_id.name,
+            'state': wo.state,
+            'date_start': wo.date_start.strftime("%Y-%m-%d %H:%M") if wo.date_start else "",
+            'date_end': wo.date_finished.strftime("%Y-%m-%d %H:%M") if wo.date_finished else "",
+        } for wo in workorders]
+
