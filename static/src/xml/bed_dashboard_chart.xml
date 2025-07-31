@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <t t-name="bed_management.bed_product_dashboard_template">
-        <div class="o_bed_dashboard_scroll">
+        <div class="o_bed_dashboard_scroll" style="max-height: 90vh; overflow-y: auto;">
 
             <!-- Dashboard Header -->
             <div class="text-center my-4">
@@ -9,7 +9,7 @@
             </div>
 
             <!-- Dashboard Tiles -->
-            <div class="row text-center mb-4">
+            <div class="row text-center mb-4" style="margin-left:40px;margin-right:40px">
                 <div class="col-md-2">
                     <button t-on-click="openMrpView" class="btn btn-light btn-sm mt-1">
                         <div style="width: 180px; height: 70px; background: #2980b9; color: white; border-radius: 8px; display: flex; align-items: center; justify-content: space-around;">
@@ -120,24 +120,10 @@
                 </div>
             </div>
 
-            <!--                        &lt;!&ndash; MRP Trend Chart &ndash;&gt;-->
-            <!--                        <div class="row mb-4">-->
-            <!--                            <div class="col-12">-->
-            <!--                                <div class="card">-->
-            <!--                                    <div class="card-header">Daily MRP Orders</div>-->
-            <!--                                    <div class="card-body">-->
-            <!--                                        <canvas id="chart_daily_mrps" height="100"></canvas>-->
-            <!--                                    </div>-->
-            <!--                                </div>-->
-            <!--                            </div>-->
-            <!--                        </div>-->
-
-        </div>
-
-<!--        graph-->
-            <div class="o_bed_charts" style="margin-top: 30px;">
+            <!--graph-->
+            <div style="margin-top: 30px;">
                 <!-- Top Row: Bar and Line -->
-                <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                <div style="display: flex; flex-wrap: wrap; gap: 30px;margin-left: 40px;margin-right:40px">
                     <!-- Bar Chart -->
                     <div style="flex: 1; min-width: 300px;">
                         <canvas id="bed_bar_chart"></canvas>
@@ -150,8 +136,18 @@
 
                 <!-- Second Row: Pie Chart full width -->
                 <div style="margin-top: 30px;">
-                    <canvas id="bed_pie_chart" style="width: 100%; max-width: 700px; margin: auto; display: block;"></canvas>
+                    <canvas id="bed_pie_chart"
+                            style="width: 100%; max-width: 700px; margin: auto; display: block;"></canvas>
                 </div>
             </div>
+
+       <!-- Production Volume Chart by Date -->
+            <div class="mt-4 p-3 shadow rounded bg-white">
+                <h4 class="text-center mb-3">📅 Production Orders by Date</h4>
+                <canvas id="production_volume_chart" style="max-height: 400px;"></canvas>
+           </div>
+
+
+        </div>
     </t>
 </odoo>

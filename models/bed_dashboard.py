@@ -28,3 +28,29 @@ class BedProductDashboard(models.Model):
             'mrp_to_close_count' : mrp_to_close_count,
             'mrp_done_count' : mrp_done_count,
         }
+    # mo production
+
+    @api.model
+    def get_production_volume_by_date(self):
+        self.env.cr.execute("""
+                SELECT 
+                    to_char(date_start, 'YYYY-MM-DD') AS production_date,
+                    COUNT(*) AS production_count
+                FROM mrp_production
+                WHERE date_start IS NOT NULL
+                GROUP BY production_date
+                ORDER BY production_date ASC
+            """)
+        result = self.env.cr.fetchall()
+
+        labels = []
+        data = []
+
+        for rec in result:
+            labels.append(rec[0])
+            data.append(rec[1])
+
+        return {
+            'labels': labels,
+            'data': data
+        }
