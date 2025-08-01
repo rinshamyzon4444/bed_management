@@ -149,7 +149,7 @@ export class BedProductDashboard extends Component {
 
     renderRawMaterialLineChart() {
         new Chart(document.getElementById("raw_material_line_chart"), {
-            type: "line",
+            type: "bar",
             data: {
                 labels: this.state.rawMaterialLabels,
                 datasets: this.state.rawMaterialDatasets,
