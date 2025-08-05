@@ -8,6 +8,7 @@ export class BedProductDashboard extends Component {
     setup() {
         this.orm = useService("orm");
         this.action = useService("action");
+        this.viewService = useService("view");
 
         this.state = useState({
             mrp_order: 0,

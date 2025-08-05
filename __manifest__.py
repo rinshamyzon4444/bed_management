@@ -10,6 +10,7 @@
     'version': '17.0.0.0',
     "depends": ['base', 'web', 'sale', 'sale_management', 'account', 'product', 'stock', 'mrp', 'hr'],
     "data": [
+        'security/security.xml',
         'security/ir.model.access.csv',
         'views/bed.xml',
         'views/bed_dashboard_menu.xml',

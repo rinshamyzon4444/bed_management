@@ -53,7 +53,8 @@
 
     <menuitem id="menu_bed_root" name="Bed Product Management"/>
     <menuitem id="menu_bed_products_root" name="Products"
-              parent="menu_bed_root" sequence="5"/>
+              parent="menu_bed_root" sequence="5"
+              groups="group_bedmanagement_superadmin,group_bedmanagement_productionManager"/>
     <menuitem id="menu_bed_products" name="Bed Products"
               parent="menu_bed_products_root" action="action_bed_products_only" sequence="6"/>
 </odoo>

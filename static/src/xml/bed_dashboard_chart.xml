@@ -151,13 +151,13 @@
             <div style="display: flex; gap: 50px;flex-wrap: wrap; margin-top: 60px; margin-left: 90px;margin-right:50px;justify-content:between">
                 <!-- Line Chart Container -->
                 <div style="flex: 1; max-width: 700px; max-height: 600px;">
-<!--                    <h5 class="text-center mb-2">Raw Material Usage (Line)</h5>-->
+                    <!--                    <h5 class="text-center mb-2">Raw Material Usage (Line)</h5>-->
                     <canvas id="raw_material_line_chart"></canvas>
                 </div>
 
                 <!-- Pie Chart -->
                 <div style="flex: 1;max-width: 800px; max-height: 300px;margin-left:150px;margin-bottom:15px;">
-<!--                    <h5 class="text-center">Raw Material Usage by Bed Type</h5>-->
+                    <!--                    <h5 class="text-center">Raw Material Usage by Bed Type</h5>-->
                     <canvas id="raw_material_pie_chart"></canvas>
                 </div>
             </div>

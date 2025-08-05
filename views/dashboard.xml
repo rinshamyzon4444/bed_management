@@ -5,7 +5,8 @@
         <menuitem id="menu_bed_dashboard_root"
                   name="Overview"
                   parent="menu_bed_root"
-                  sequence="0"/>
+                  sequence="0"
+                  groups="group_bedmanagement_superadmin,group_bedmanagement_productionManager"/>
 
         <record id="action_bed_daily_production" model="ir.actions.act_window">
             <field name="name">Daily Production</field>
@@ -22,17 +23,17 @@
 
     </data>
 
-        <record id="action_bed_mo_status" model="ir.actions.act_window">
-            <field name="name">Manufacturing Order Status</field>
-            <field name="res_model">mrp.production</field>
-            <field name="view_mode">pivot,graph,list</field>
-            <field name="context">{'group_by': 'state'}</field>
-        </record>
+    <record id="action_bed_mo_status" model="ir.actions.act_window">
+        <field name="name">Manufacturing Order Status</field>
+        <field name="res_model">mrp.production</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="context">{'group_by': 'state'}</field>
+    </record>
 
-        <menuitem id="menu_bed_mo_status"
-                  name="Manufacturing Order Status"
-                  parent="menu_bed_dashboard_root"
-                  action="action_bed_mo_status"
-                  sequence="3"/>
+    <menuitem id="menu_bed_mo_status"
+              name="Manufacturing Order Status"
+              parent="menu_bed_dashboard_root"
+              action="action_bed_mo_status"
+              sequence="3"/>
 
 </odoo>
