@@ -97,29 +97,15 @@ class BedProductDashboard(models.Model):
             'pie': pie,
         }
 
+
+#     quality check and list wo
+
     @api.model
     def get_latest_workorders(self):
         workorders = self.env['mrp.workorder'].search([], order='id desc', limit=10)
-        return [{
-            'id': wo.id,
-            'name': wo.name,
-            'mo_name': wo.production_id.name if wo.production_id else "",
-            'product_name': wo.production_id.product_id.name if wo.production_id and wo.production_id.product_id else "",
-            'workcenter_id': wo.workcenter_id.name,
-            'state': wo.state,
-            'date_start': wo.date_start.strftime("%Y-%m-%d %H:%M") if wo.date_start else "",
-            'date_end': wo.date_finished.strftime("%Y-%m-%d %H:%M") if wo.date_finished else "",
-        } for wo in workorders]
 
-# wo fail or pass
-    @api.model
-    def get_latest_workorders(self):
-        # Fetch ALL workorders (or only 'done' ones)
-        workorders = self.env['mrp.workorder'].search([])  # or add domain [('state', '=', 'done')]
-
-        total = len(workorders)
-        passed = 0
-        failed = 0
+        passed = failed = 0
+        workorder_list = []
 
         for wo in workorders:
             if wo.inspection_result == 'pass':
@@ -127,17 +113,23 @@ class BedProductDashboard(models.Model):
             elif wo.inspection_result == 'fail':
                 failed += 1
 
-        return {
-            'workorders': [{
+            workorder_list.append({
                 'id': wo.id,
                 'name': wo.name,
+                'mo_name': wo.production_id.name if wo.production_id else "",
                 'product_name': wo.production_id.product_id.name if wo.production_id and wo.production_id.product_id else "",
                 'workcenter_id': wo.workcenter_id.name if wo.workcenter_id else "",
                 'inspection_result': wo.inspection_result,
-            } for wo in workorders],
+                'state': wo.state,
+                'date_start': wo.date_start.strftime("%Y-%m-%d %H:%M") if wo.date_start else "",
+                'date_end': wo.date_finished.strftime("%Y-%m-%d %H:%M") if wo.date_finished else "",
+            })
+
+        return {
+            'workorders': workorder_list,
             'quality_summary': {
                 'passed': passed,
                 'failed': failed,
-                'total': total
+                'total': len(workorders),
             }
         }
