@@ -140,6 +140,12 @@
                             style="width: 60%; max-width: 500px; margin: auto; display: block;"></canvas>
                 </div>
             </div>
+<!--            wo fail or pass-->
+
+           <div style="width: 700px; height: 350px; margin: 30px auto;">
+                <canvas id="workorder_pass_fail_chart" style="width: 100%; height: 100%;"></canvas>
+           </div>
+
 
             <!-- Production Volume Chart by Date -->
             <div class="mt-4 p-3 shadow rounded bg-white" style="margin-left: 40px;margin-right:40px">

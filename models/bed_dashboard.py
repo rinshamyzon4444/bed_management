@@ -111,3 +111,33 @@ class BedProductDashboard(models.Model):
             'date_end': wo.date_finished.strftime("%Y-%m-%d %H:%M") if wo.date_finished else "",
         } for wo in workorders]
 
+# wo fail or pass
+    @api.model
+    def get_latest_workorders(self):
+        # Fetch ALL workorders (or only 'done' ones)
+        workorders = self.env['mrp.workorder'].search([])  # or add domain [('state', '=', 'done')]
+
+        total = len(workorders)
+        passed = 0
+        failed = 0
+
+        for wo in workorders:
+            if wo.inspection_result == 'pass':
+                passed += 1
+            elif wo.inspection_result == 'fail':
+                failed += 1
+
+        return {
+            'workorders': [{
+                'id': wo.id,
+                'name': wo.name,
+                'product_name': wo.production_id.product_id.name if wo.production_id and wo.production_id.product_id else "",
+                'workcenter_id': wo.workcenter_id.name if wo.workcenter_id else "",
+                'inspection_result': wo.inspection_result,
+            } for wo in workorders],
+            'quality_summary': {
+                'passed': passed,
+                'failed': failed,
+                'total': total
+            }
+        }
