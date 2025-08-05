@@ -42,8 +42,14 @@ export class BedProductDashboard extends Component {
             this.state.pieData = rawMaterialResult.pie?.data || [];
             this.state.pieColors = rawMaterialResult.pie?.colors || [];
 
-            const workorders = await this.orm.call("bed.product.dashboard", "get_latest_workorders", [], {}); // ⬅️ NEW
-            this.latestWorkorders.records = workorders; // ⬅️ NEW
+           const workorders = await this.orm.call("bed.product.dashboard", "get_latest_workorders", [], {});
+            this.latestWorkorders.records = workorders.workorders;
+            this.state.woPassFailLabels = ["Passed", "Failed"];
+            this.state.woPassFailData = [
+                workorders.quality_summary.passed,
+                workorders.quality_summary.failed,
+            ];
+
         });
 
         onMounted(() => {
@@ -53,6 +59,7 @@ export class BedProductDashboard extends Component {
             this.renderProductionVolumeChart();
             this.renderRawMaterialLineChart();
             this.renderRawMaterialPieChart();
+            this.renderWorkorderPassFailChart();
         });
     }
 
@@ -187,6 +194,38 @@ export class BedProductDashboard extends Component {
             },
         });
     }
+
+       renderWorkorderPassFailChart() {
+    const ctx = document.getElementById("workorder_pass_fail_chart");
+    if (!ctx) return;
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: this.state.woPassFailLabels,
+            datasets: [{
+                label: "Workorder Inspection Results",
+                data: this.state.woPassFailData,
+                backgroundColor: ["#4CAF50", "#F44336"],
+            }],
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true },
+                title: {
+                    display: true,
+                    text: "Workorder Pass vs Fail",
+                    font: { size: 16 },
+                },
+            },
+            scales: {
+                y: { beginAtZero: true },
+            },
+        },
+    });
+}
+
 
     // ---- Navigation Actions ----
     openMrpView() {
