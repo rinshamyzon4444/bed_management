@@ -1,10 +1,18 @@
 from odoo import models, fields, api
 from datetime import datetime, timedelta, date
-from collections import defaultdict
 
 class BedProductDashboard(models.Model):
     _name = 'bed.product.dashboard'
     _description = 'Bed Product Manufacturing Dashboard'
+
+    @api.model
+    def get_user_group_info(self):
+        user = self.env.user
+        return {
+            'is_superadmin': user.has_group('bed_management.group_bedmanagement_superadmin'),
+            'is_production_manager': user.has_group('bed_management.group_bedmanagement_productionManager'),
+            'is_quality_inspector': user.has_group('bed_management.group_bedmanagement_QualityInspector'),
+        }
 
     @api.model
     def get_tiles_data(self):
