@@ -40,7 +40,7 @@
     </record>
 
     <menuitem id="menu_bed_mano" name="Manufacturing" parent="menu_bed_root" sequence="10"
-              groups="group_bedmanagement_superadmin,group_bedmanagement_productionManager,group_bedmanagement_QualityInspector"/>
+              groups="group_bedmanagement_superadmin,group_bedmanagement_productionManager,group_bedmanagement_QualityInspector,group_bedmanagement_employee"/>
 
 
     <menuitem id="menu_bed_mo"
@@ -48,7 +48,7 @@
               parent="menu_bed_mano"
               action="action_bed_mo"
               sequence="1"
-              groups="group_bedmanagement_productionManager"/>
+              groups="group_bedmanagement_productionManager,group_bedmanagement_employee"/>
 
 
     <menuitem id="menu_bed_work_orders"
@@ -56,20 +56,20 @@
               parent="menu_bed_mano"
               action="action_bed_work_orders"
               sequence="2"
-              groups="group_bedmanagement_productionManager,group_bedmanagement_QualityInspector"/>
+              groups="group_bedmanagement_productionManager,group_bedmanagement_QualityInspector,group_bedmanagement_employee"/>
 
     <menuitem id="menu_bed_operations"
               name="Operations"
               parent="menu_bed_mano"
               action="action_bed_operations"
               sequence="3"
-              groups="group_bedmanagement_productionManager"/>
+              groups="group_bedmanagement_productionManager,group_bedmanagement_employee"/>
 
     <menuitem id="menu_bed_work_center"
               name="Work Centers"
               parent="menu_bed_mano"
               action="action_bed_work_center"
               sequence="4"
-              groups="group_bedmanagement_productionManager"/>
+              groups="group_bedmanagement_productionManager,group_bedmanagement_employee"/>
 
 </odoo>

@@ -8,6 +8,8 @@ class BedProductDashboard(models.Model):
 
     @api.model
     def get_tiles_data(self):
+
+
         today = date.today()
         start = datetime.combine(today, datetime.min.time())
         end = datetime.combine(today, datetime.max.time())
@@ -102,6 +104,7 @@ class BedProductDashboard(models.Model):
 
     @api.model
     def get_latest_workorders(self):
+
         workorders = self.env['mrp.workorder'].search([], order='id desc', limit=10)
 
         passed = failed = 0

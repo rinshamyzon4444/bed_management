@@ -6,5 +6,5 @@
     </record>
 
     <menuitem id="menu_bed_bom" name="Bill of Materials" parent="menu_bed_root" action="action_bed_bom" sequence="20"
-              groups="group_bedmanagement_superadmin,group_bedmanagement_productionManager"/>
+              groups="group_bedmanagement_superadmin,group_bedmanagement_productionManager,group_bedmanagement_employee"/>
 </odoo>
