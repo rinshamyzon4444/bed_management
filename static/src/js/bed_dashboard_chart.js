@@ -24,6 +24,11 @@ export class BedProductDashboard extends Component {
             pieLabels: [],
             pieData: [],
             pieColors: [],
+            groupInfo: {
+                is_superadmin: false,
+                is_production_manager: false,
+                is_quality_inspector: false,
+            },
         });
 
         this.latestWorkorders = useState({ records: [] }); // ⬅️ NEW
@@ -51,6 +56,8 @@ export class BedProductDashboard extends Component {
                 workorders.quality_summary.failed,
             ];
 
+            const groupInfo = await this.orm.call("bed.product.dashboard", "get_user_group_info", [], {});
+            this.state.groupInfo = groupInfo;
 
         });
 
@@ -62,13 +69,14 @@ export class BedProductDashboard extends Component {
             this.renderRawMaterialLineChart();
             this.renderRawMaterialPieChart();
             this.renderWorkorderPassFailChart();
-
-
         });
     }
 
     renderBarChart() {
-        new Chart(document.getElementById("bed_bar_chart"), {
+        const el = document.getElementById("bed_bar_chart");
+        if (!el) return; // Prevent crash if DOM element doesn't exist
+
+        new Chart(el, {
             type: "bar",
             data: {
                 labels: ["Draft", "Confirmed", "In Progress", "To Close", "Done"],
@@ -88,7 +96,9 @@ export class BedProductDashboard extends Component {
     }
 
     renderLineChart() {
-        new Chart(document.getElementById("bed_line_chart"), {
+        const el = document.getElementById("bed_line_chart");
+        if (!el) return; // Prevent crash if DOM element doesn't exist
+        new Chart(el, {
             type: "line",
             data: {
                 labels: ["Draft", "Confirmed", "In Progress", "To Close", "Done"],
@@ -110,7 +120,9 @@ export class BedProductDashboard extends Component {
     }
 
     renderPieChart() {
-        new Chart(document.getElementById("bed_pie_chart"), {
+        const el = document.getElementById("bed_pie_chart");
+        if (!el) return; // Prevent crash if DOM element doesn't exist
+        new Chart(el, {
             type: "pie",
             data: {
                 labels: ["Draft", "Confirmed", "In Progress", "To Close", "Done"],
@@ -136,7 +148,9 @@ export class BedProductDashboard extends Component {
     }
 
     renderProductionVolumeChart() {
-        new Chart(document.getElementById("production_volume_chart"), {
+        const el = document.getElementById("production_volume_chart");
+        if (!el) return;
+        new Chart(el, {
             type: "bar",
             data: {
                 labels: this.state.productionVolumeLabels,
@@ -159,7 +173,9 @@ export class BedProductDashboard extends Component {
     }
 
     renderRawMaterialLineChart() {
-        new Chart(document.getElementById("raw_material_line_chart"), {
+        const el = document.getElementById("raw_material_line_chart");
+        if (!el) return;
+        new Chart(el, {
             type: "bar",
             data: {
                 labels: this.state.rawMaterialLabels,
@@ -178,7 +194,9 @@ export class BedProductDashboard extends Component {
     }
 
     renderRawMaterialPieChart() {
-        new Chart(document.getElementById("raw_material_pie_chart"), {
+        const el = document.getElementById("raw_material_pie_chart");
+        if (!el) return;
+        new Chart(el, {
             type: "pie",
             data: {
                 labels: this.state.pieLabels,
@@ -199,7 +217,7 @@ export class BedProductDashboard extends Component {
         });
     }
 
-     renderWorkorderPassFailChart() {
+    renderWorkorderPassFailChart() {
     const ctx = document.getElementById("workorder_pass_fail_chart");
     if (!ctx) return;
 
@@ -289,8 +307,6 @@ export class BedProductDashboard extends Component {
             domain: [["state", "=", "progress"]],
         });
     }
-
-
 
     openMrpToCloseView() {
         this.action.doAction({

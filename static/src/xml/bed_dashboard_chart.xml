@@ -10,207 +10,217 @@
             </div>
 
             <!-- Dashboard Tiles -->
-            <div class="row text-center mb-4" style="margin-left:40px;margin-right:40px">
-                <div class="col-md-2">
-                    <button t-on-click="openMrpView" class="btn btn-light btn-sm mt-1">
-                        <div style="width: 180px; height: 70px; background: #2980b9; color: white; border-radius: 8px; display: flex; align-items: center; justify-content: space-around;">
-                            <div>
-                                <i class="fa fa-cogs" style="font-size: 24px;"></i>
-                            </div>
-                            <div>
+            <t t-if="state.groupInfo.is_superadmin or state.groupInfo.is_production_manager">
+                <div class="row text-center mb-4" style="margin-left:40px;margin-right:40px">
+                    <div class="col-md-2">
+                        <button t-on-click="openMrpView" class="btn btn-light btn-sm mt-1">
+                            <div style="width: 180px; height: 70px; background: #2980b9; color: white; border-radius: 8px; display: flex; align-items: center; justify-content: space-around;">
                                 <div>
-                                    <strong>Total MRP Orders</strong>
+                                    <i class="fa fa-cogs" style="font-size: 24px;"></i>
                                 </div>
-                                <div id="mrp_order" class="mt-2 fs-4">
-                                    <t t-esc="state.mrp_order"/>
-                                </div>
-                            </div>
-                        </div>
-                    </button>
-                </div>
-
-                <div class="col-md-2">
-                    <button t-on-click="openMrpDraftView" class="btn btn-light btn-sm mt-1">
-                        <div style="width: 180px; height: 70px; background: #95a5a6; color: white; border-radius: 8px; display: flex; align-items: center; justify-content: space-around;">
-                            <div>
-                                <i class="fa fa-pencil-square-o" style="font-size: 24px;"/>
-                            </div>
-                            <div>
                                 <div>
-                                    <strong>Draft</strong>
-                                </div>
-                                <div id="mrp_draft_count" class="mt-2 fs-4">
-                                    <t t-esc="state.mrp_draft_count"/>
-                                </div>
-                            </div>
-                        </div>
-                    </button>
-                </div>
-
-
-                <div class="col-md-2">
-                    <button t-on-click="openMrpConfirmedView" class="btn btn-light btn-sm mt-1">
-                        <div style="width: 180px; height: 70px; background: #f1c40f; color: white; border-radius: 8px; display: flex; align-items: center; justify-content: space-around;">
-                            <div>
-                                <i class="fa fa-check-circle" style="font-size: 24px;"></i>
-                            </div>
-                            <div>
-                                <div>
-                                    <strong>Confirmed</strong>
-                                </div>
-                                <div id="mrp_confirmed_count" class="mt-2 fs-4">
-                                    <t t-esc="state.mrp_confirmed_count"/>
+                                    <div>
+                                        <strong>Total MRP Orders</strong>
+                                    </div>
+                                    <div id="mrp_order" class="mt-2 fs-4">
+                                        <t t-esc="state.mrp_order"/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </button>
-                </div>
-
-                <div class="col-md-2">
-                    <button t-on-click="openMrpInProgressView" class="btn btn-light btn-sm mt-1">
-                        <div style="width: 180px; height: 70px; background: #3498db; color: white; border-radius: 8px; display: flex; align-items: center; justify-content: space-around;">
-                            <div>
-                                <i class="fa fa-spinner fa-spin" style="font-size: 24px;"></i>
-                            </div>
-                            <div>
-                                <div>
-                                    <strong>In Progress</strong>
-                                </div>
-                                <div id="mrp_in_progress_count" class="mt-2 fs-4">
-                                    <t t-esc="state.mrp_in_progress_count"/>
-                                </div>
-                            </div>
-                        </div>
-                    </button>
-                </div>
-
-                <div class="col-md-2">
-                    <button t-on-click="openMrpToCloseView" class="btn btn-light btn-sm mt-1">
-                        <div style="width: 180px; height: 70px; background: #e67e22; color: white; border-radius: 8px; display: flex; align-items: center; justify-content: space-around;">
-                            <div>
-                                <i class="fa fa-hourglass-half" style="font-size: 24px;"></i>
-                            </div>
-                            <div>
-                                <div>
-                                    <strong>To Close</strong>
-                                </div>
-                                <div id="mrp_to_close_count" class="mt-2 fs-4">
-                                    <t t-esc="state.mrp_to_close_count"/>
-                                </div>
-                            </div>
-                        </div>
-                    </button>
-                </div>
-
-                <div class="col-md-2">
-                    <button t-on-click="openMrpDoneView" class="btn btn-light btn-sm mt-1">
-                        <div style="width: 180px; height: 70px; background: #27ae60; color: white; border-radius: 8px; display: flex; align-items: center; justify-content: space-around;">
-                            <div>
-                                <i class="fa fa-check" style="font-size: 24px;"></i>
-                            </div>
-                            <div>
-                                <div>
-                                    <strong>Done</strong>
-                                </div>
-                                <div id="mrp_done_count" class="mt-2 fs-4">
-                                    <t t-esc="state.mrp_done_count"/>
-                                </div>
-                            </div>
-                        </div>
-                    </button>
-                </div>
-            </div>
-
-            <!--graph-->
-            <div style="margin-top: 30px;">
-                <!-- Top Row: Bar and Line -->
-                <div style="display: flex; flex-wrap: wrap; gap: 30px;margin-left: 40px;margin-right:40px">
-                    <!-- Bar Chart -->
-                    <div style="flex: 1; min-width: 300px;">
-                        <canvas id="bed_bar_chart"></canvas>
+                        </button>
                     </div>
-                    <!-- Line Chart -->
-                    <div style="flex: 1; min-width: 300px;">
-                        <canvas id="bed_line_chart"></canvas>
+
+                    <div class="col-md-2">
+                        <button t-on-click="openMrpDraftView" class="btn btn-light btn-sm mt-1">
+                            <div style="width: 180px; height: 70px; background: #95a5a6; color: white; border-radius: 8px; display: flex; align-items: center; justify-content: space-around;">
+                                <div>
+                                    <i class="fa fa-pencil-square-o" style="font-size: 24px;"/>
+                                </div>
+                                <div>
+                                    <div>
+                                        <strong>Draft</strong>
+                                    </div>
+                                    <div id="mrp_draft_count" class="mt-2 fs-4">
+                                        <t t-esc="state.mrp_draft_count"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <button t-on-click="openMrpConfirmedView" class="btn btn-light btn-sm mt-1">
+                            <div style="width: 180px; height: 70px; background: #f1c40f; color: white; border-radius: 8px; display: flex; align-items: center; justify-content: space-around;">
+                                <div>
+                                    <i class="fa fa-check-circle" style="font-size: 24px;"></i>
+                                </div>
+                                <div>
+                                    <div>
+                                        <strong>Confirmed</strong>
+                                    </div>
+                                    <div id="mrp_confirmed_count" class="mt-2 fs-4">
+                                        <t t-esc="state.mrp_confirmed_count"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button t-on-click="openMrpInProgressView" class="btn btn-light btn-sm mt-1">
+                            <div style="width: 180px; height: 70px; background: #3498db; color: white; border-radius: 8px; display: flex; align-items: center; justify-content: space-around;">
+                                <div>
+                                    <i class="fa fa-spinner fa-spin" style="font-size: 24px;"></i>
+                                </div>
+                                <div>
+                                    <div>
+                                        <strong>In Progress</strong>
+                                    </div>
+                                    <div id="mrp_in_progress_count" class="mt-2 fs-4">
+                                        <t t-esc="state.mrp_in_progress_count"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button t-on-click="openMrpToCloseView" class="btn btn-light btn-sm mt-1">
+                            <div style="width: 180px; height: 70px; background: #e67e22; color: white; border-radius: 8px; display: flex; align-items: center; justify-content: space-around;">
+                                <div>
+                                    <i class="fa fa-hourglass-half" style="font-size: 24px;"></i>
+                                </div>
+                                <div>
+                                    <div>
+                                        <strong>To Close</strong>
+                                    </div>
+                                    <div id="mrp_to_close_count" class="mt-2 fs-4">
+                                        <t t-esc="state.mrp_to_close_count"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button t-on-click="openMrpDoneView" class="btn btn-light btn-sm mt-1">
+                            <div style="width: 180px; height: 70px; background: #27ae60; color: white; border-radius: 8px; display: flex; align-items: center; justify-content: space-around;">
+                                <div>
+                                    <i class="fa fa-check" style="font-size: 24px;"></i>
+                                </div>
+                                <div>
+                                    <div>
+                                        <strong>Done</strong>
+                                    </div>
+                                    <div id="mrp_done_count" class="mt-2 fs-4">
+                                        <t t-esc="state.mrp_done_count"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Second Row: Pie Chart full width -->
+
+                <!--graph-->
                 <div style="margin-top: 30px;">
-                    <canvas id="bed_pie_chart"
-                            style="width: 60%; max-width: 500px; margin: auto; display: block;"></canvas>
+                    <!-- Top Row: Bar and Line -->
+                    <div style="display: flex; flex-wrap: wrap; gap: 30px;margin-left: 40px;margin-right:40px">
+                        <!-- Bar Chart -->
+                        <div style="flex: 1; min-width: 300px;">
+                            <canvas id="bed_bar_chart"></canvas>
+                        </div>
+                        <!-- Line Chart -->
+                        <div style="flex: 1; min-width: 300px;">
+                            <canvas id="bed_line_chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Second Row: Pie Chart full width -->
+                    <div style="margin-top: 30px;">
+                        <canvas id="bed_pie_chart"
+                                style="width: 60%; max-width: 500px; margin: auto; display: block;"></canvas>
+                    </div>
                 </div>
-            </div>
-<!--            wo fail or pass-->
+            </t>
 
-           <div style="width: 700px; height: 350px; margin: 30px auto;">
-                <canvas id="workorder_pass_fail_chart" style="width: 100%; height: 100%;"></canvas>
-           </div>
-
+            <!--            wo fail or pass-->
+            <t t-if="state.groupInfo.is_superadmin or state.groupInfo.is_quality_inspector">
+                <div style="width: 700px; height: 350px; margin: 30px auto;">
+                    <canvas id="workorder_pass_fail_chart" style="width: 100%; height: 100%;"></canvas>
+                </div>
+            </t>
 
 
             <!-- Production Volume Chart by Date -->
-            <div class="mt-4 p-3 shadow rounded bg-white" style="margin-left: 40px;margin-right:40px">
-                <h4 class="text-center mb-3">Production Orders by Date</h4>
-                <canvas id="production_volume_chart" style="max-height: 400px;"></canvas>
-            </div>
+            <t t-if="state.groupInfo.is_superadmin or state.groupInfo.is_production_manager">
+                <div class="mt-4 p-3 shadow rounded bg-white" style="margin-left: 40px;margin-right:40px">
+                    <h4 class="text-center mb-3">Production Orders by Date</h4>
+                    <canvas id="production_volume_chart" style="max-height: 400px;"></canvas>
+                </div>
+            </t>
 
             <!-- Raw Material Line and Pie Charts -->
-            <div style="display: flex; gap: 50px;flex-wrap: wrap; margin-top: 60px; margin-left: 90px;margin-right:50px;justify-content:between">
-                <!-- Line Chart Container -->
-                <div style="flex: 1; max-width: 700px; max-height: 600px;">
-                    <!--                    <h5 class="text-center mb-2">Raw Material Usage (Line)</h5>-->
-                    <canvas id="raw_material_line_chart"></canvas>
-                </div>
+            <t t-if="state.groupInfo.is_superadmin or state.groupInfo.is_production_manager">
+                <div style="display: flex; gap: 50px;flex-wrap: wrap; margin-top: 60px; margin-left: 90px;margin-right:50px;justify-content:between">
+                    <!-- Line Chart Container -->
+                    <div style="flex: 1; max-width: 700px; max-height: 600px;">
+                        <!--                    <h5 class="text-center mb-2">Raw Material Usage (Line)</h5>-->
+                        <canvas id="raw_material_line_chart"></canvas>
+                    </div>
 
-                <!-- Pie Chart -->
-                <div style="flex: 1;max-width: 800px; max-height: 300px;margin-left:150px;margin-bottom:15px;">
-                    <!--                    <h5 class="text-center">Raw Material Usage by Bed Type</h5>-->
-                    <canvas id="raw_material_pie_chart"></canvas>
+                    <!-- Pie Chart -->
+                    <div style="flex: 1;max-width: 800px; max-height: 300px;margin-left:150px;margin-bottom:15px;">
+                        <!--                    <h5 class="text-center">Raw Material Usage by Bed Type</h5>-->
+                        <canvas id="raw_material_pie_chart"></canvas>
+                    </div>
                 </div>
-            </div>
+            </t>
 
             <!--          list view work orders-->
-            <div class="my-5" style="margin-left: 40px;margin-right:40px">
-                <h4 class="mb-3">Latest Work Orders</h4>
-                <table class="table table-bordered table-striped shadow-sm">
-                    <thead class="table-light">
-                        <tr>
-                            <th>MO</th>
-                            <th>Name</th>
-                            <th>Product</th>
-                            <th>State</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <t t-foreach="latestWorkorders.records" t-as="wo" t-key="wo.id">
+            <t t-if="state.groupInfo.is_superadmin or state.groupInfo.is_quality_inspector">
+                <div class="my-5" style="margin-left: 40px;margin-right:40px">
+                    <h4 class="mb-3">Latest Work Orders</h4>
+                    <table class="table table-bordered table-striped shadow-sm">
+                        <thead class="table-light">
                             <tr>
-                                <td>
-                                    <t t-esc="wo.mo_name"/>
-                                </td>
-                                <td>
-                                    <t t-esc="wo.name"/>
-                                </td>
-                                <td>
-                                    <t t-esc="wo.product_name"/>
-                                </td>
-                                <td>
-                                    <t t-esc="wo.state"/>
-                                </td>
-                                <td>
-                                    <t t-esc="wo.date_start"/>
-                                </td>
-                                <td>
-                                    <t t-esc="wo.date_end"/>
-                                </td>
+                                <th>MO</th>
+                                <th>Name</th>
+                                <th>Product</th>
+                                <th>State</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
                             </tr>
-                        </t>
-                    </tbody>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="latestWorkorders.records" t-as="wo" t-key="wo.id">
+                                <tr>
+                                    <td>
+                                        <t t-esc="wo.mo_name"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="wo.name"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="wo.product_name"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="wo.state"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="wo.date_start"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="wo.date_end"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
 
-                </table>
-            </div>
+                    </table>
+                </div>
+            </t>
 
 
         </div>
