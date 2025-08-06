@@ -287,8 +287,6 @@ export class BedProductDashboard extends Component {
         });
     }
 
-
-
     openMrpToCloseView() {
         this.action.doAction({
             name: "MRP Orders To Close",
