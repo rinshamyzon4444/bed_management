@@ -4,6 +4,7 @@
         <div class="o_bed_dashboard_scroll" style="max-height: 90vh; overflow-y: auto;">
 
             <!-- Dashboard Header -->
+
             <div class="text-center my-4">
                 <h1>📦 Bed Product Dashboard</h1>
             </div>
