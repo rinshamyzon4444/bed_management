@@ -28,6 +28,7 @@ export class BedProductDashboard extends Component {
                 is_superadmin: false,
                 is_production_manager: false,
                 is_quality_inspector: false,
+                is_employee: false,
             },
         });
 

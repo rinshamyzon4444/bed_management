@@ -12,6 +12,7 @@ class BedProductDashboard(models.Model):
             'is_superadmin': user.has_group('bed_management.group_bedmanagement_superadmin'),
             'is_production_manager': user.has_group('bed_management.group_bedmanagement_productionManager'),
             'is_quality_inspector': user.has_group('bed_management.group_bedmanagement_QualityInspector'),
+            'is_employee': user.has_group('bed_management.group_bedmanagement_employee'),
         }
 
     @api.model

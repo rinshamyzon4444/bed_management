@@ -10,7 +10,7 @@
             </div>
 
             <!-- Dashboard Tiles -->
-            <t t-if="state.groupInfo.is_superadmin or state.groupInfo.is_production_manager">
+            <t t-if="state.groupInfo.is_superadmin or state.groupInfo.is_production_manager or state.groupInfo.is_employee">
                 <div class="row text-center mb-4" style="margin-left:40px;margin-right:40px">
                     <div class="col-md-2">
                         <button t-on-click="openMrpView" class="btn btn-light btn-sm mt-1">
@@ -146,7 +146,7 @@
             </t>
 
             <!--            wo fail or pass-->
-            <t t-if="state.groupInfo.is_superadmin or state.groupInfo.is_quality_inspector">
+            <t t-if="state.groupInfo.is_superadmin or state.groupInfo.is_quality_inspector or state.groupInfo.is_employee">
                 <div style="width: 700px; height: 350px; margin: 30px auto;">
                     <canvas id="workorder_pass_fail_chart" style="width: 100%; height: 100%;"></canvas>
                 </div>
@@ -154,7 +154,7 @@
 
 
             <!-- Production Volume Chart by Date -->
-            <t t-if="state.groupInfo.is_superadmin or state.groupInfo.is_production_manager">
+            <t t-if="state.groupInfo.is_superadmin or state.groupInfo.is_production_manager or state.groupInfo.is_employee">
                 <div class="mt-4 p-3 shadow rounded bg-white" style="margin-left: 40px;margin-right:40px">
                     <h4 class="text-center mb-3">Production Orders by Date</h4>
                     <canvas id="production_volume_chart" style="max-height: 400px;"></canvas>
@@ -162,7 +162,7 @@
             </t>
 
             <!-- Raw Material Line and Pie Charts -->
-            <t t-if="state.groupInfo.is_superadmin or state.groupInfo.is_production_manager">
+            <t t-if="state.groupInfo.is_superadmin or state.groupInfo.is_production_manager or state.groupInfo.is_employee">
                 <div style="display: flex; gap: 50px;flex-wrap: wrap; margin-top: 60px; margin-left: 90px;margin-right:50px;justify-content:between">
                     <!-- Line Chart Container -->
                     <div style="flex: 1; max-width: 700px; max-height: 600px;">
@@ -179,7 +179,7 @@
             </t>
 
             <!--          list view work orders-->
-            <t t-if="state.groupInfo.is_superadmin or state.groupInfo.is_quality_inspector">
+            <t t-if="state.groupInfo.is_superadmin or state.groupInfo.is_quality_inspector or state.groupInfo.is_employee">
                 <div class="my-5" style="margin-left: 40px;margin-right:40px">
                     <h4 class="mb-3">Latest Work Orders</h4>
                     <table class="table table-bordered table-striped shadow-sm">
