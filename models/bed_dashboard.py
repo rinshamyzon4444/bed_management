@@ -43,23 +43,23 @@ class BedProductDashboard(models.Model):
 
     @api.model
     def get_production_volume_by_date(self):
+        current_user_id = self.env.uid  # Logged-in user's ID
+
         self.env.cr.execute("""
                 SELECT 
                     to_char(date_start, 'YYYY-MM-DD') AS production_date,
                     COUNT(*) AS production_count
                 FROM mrp_production
                 WHERE date_start IS NOT NULL
+                  AND user_id = %s
                 GROUP BY production_date
                 ORDER BY production_date ASC
-            """)
+            """, (current_user_id,))
+
         result = self.env.cr.fetchall()
 
-        labels = []
-        data = []
-
-        for rec in result:
-            labels.append(rec[0])
-            data.append(rec[1])
+        labels = [rec[0] for rec in result]
+        data = [rec[1] for rec in result]
 
         return {
             'labels': labels,
